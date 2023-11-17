@@ -1,6 +1,6 @@
 ﻿namespace SQLAPI.Model;
 
-public class Patrocinadorcs
+public class Patrocinador
 {
     public string Nombre_Comercial { get; set; }
     public string Representante { get; set; }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CyqdbYIX6rj9l1PhwS4t+filRz+U6pjTlSnhraAxpx9mcfTWwyGyrilfTkvDP1UIsTka8pSCiCD3wcyc5wRoag==",
+  "dgSpecHash": "mbThrXKUbtYMyk5e5cJ+KcY7JEHo8dpp2Td5OlSTqV2mXAPlzR8M9DYUSuh5UlbiUCsyVKefuyEtGmpIztk7YA==",
   "success": true,
-  "projectFilePath": "D:\\API1\\SQLAPI\\SQLAPI.csproj",
+  "projectFilePath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\noemi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\noemi\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

@@ -901,11 +901,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\API1\\SQLAPI\\SQLAPI.csproj",
+      "projectUniqueName": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj",
       "projectName": "SQLAPI",
-      "projectPath": "D:\\API1\\SQLAPI\\SQLAPI.csproj",
+      "projectPath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj",
       "packagesPath": "C:\\Users\\noemi\\.nuget\\packages\\",
-      "outputPath": "D:\\API1\\SQLAPI\\obj\\",
+      "outputPath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\noemi\\AppData\\Roaming\\NuGet\\NuGet.Config",

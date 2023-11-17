@@ -12,7 +12,7 @@ namespace SQLAPI.Controllers
     [ApiController]
     public class ActividadController : ControllerBase
     {
-        string constr = "Tu_Cadena_De_Conexión_Aquí";
+        string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Actividad>>> GetAllActividades()
