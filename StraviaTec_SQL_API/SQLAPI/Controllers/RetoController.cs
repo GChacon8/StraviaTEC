@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using SQLAPI.Model;
+using System.Text.RegularExpressions;
 
 namespace SQLAPI.Controllers
 {
@@ -36,9 +37,10 @@ namespace SQLAPI.Controllers
                             {
                                 ID = Convert.ToInt32(sdr["ID"]),
                                 Nombre = Convert.ToString(sdr["Nombre"]),
-                                Fecha_Inicio = Convert.ToString(sdr["Fecha_Inicio"]),
-                                Fecha_Inicial = Convert.ToString(sdr["Fecha_Inicial"]),
-                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"])
+                                Fecha_Inicio = Convert.ToDateTime(sdr["Fecha_Inicio"]),
+                                Fecha_Final = Convert.ToDateTime(sdr["Fecha_Final"]),
+                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"]),
+                                Privada = Convert.ToBoolean(sdr["Privada"])
                             });
                         }
                     }
@@ -71,9 +73,10 @@ namespace SQLAPI.Controllers
                             {
                                 ID = Convert.ToInt32(sdr["ID"]),
                                 Nombre = Convert.ToString(sdr["Nombre"]),
-                                Fecha_Inicio = Convert.ToString(sdr["Fecha_Inicio"]),
-                                Fecha_Inicial = Convert.ToString(sdr["Fecha_Inicial"]),
-                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"])
+                                Fecha_Inicio = Convert.ToDateTime(sdr["Fecha_Inicio"]),
+                                Fecha_Final = Convert.ToDateTime(sdr["Fecha_Final"]),
+                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"]),
+                                Privada = Convert.ToBoolean(sdr["Privada"])
                             };
                         }
                     }
@@ -98,13 +101,15 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Reto VALUES (@Nombre, @Fecha_Inicio, @Fecha_Inicial, @ID_Tipo_Actividad)";
+                string query = "INSERT INTO Reto VALUES (@ID, @Nombre, @Fecha_Inicio, @Fecha_Final, @ID_Tipo_Actividad, @Privada)";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    cmd.Parameters.AddWithValue("@ID", reto.ID);
                     cmd.Parameters.AddWithValue("@Nombre", reto.Nombre);
                     cmd.Parameters.AddWithValue("@Fecha_Inicio", reto.Fecha_Inicio);
-                    cmd.Parameters.AddWithValue("@Fecha_Inicial", reto.Fecha_Inicial);
+                    cmd.Parameters.AddWithValue("@Fecha_Final", reto.Fecha_Final);
                     cmd.Parameters.AddWithValue("@ID_Tipo_Actividad", reto.ID_Tipo_Actividad);
+                    cmd.Parameters.AddWithValue("@Privada", reto.Privada);
 
                     con.Open();
                     int i = cmd.ExecuteNonQuery();
@@ -129,16 +134,18 @@ namespace SQLAPI.Controllers
 
             if (ModelState.IsValid)
             {
-                string query = "UPDATE Reto SET Nombre = @Nombre, Fecha_Inicio = @Fecha_Inicio, Fecha_Inicial = @Fecha_Inicial, ID_Tipo_Actividad = @ID_Tipo_Actividad WHERE ID = @ID";
+                string query = "UPDATE Reto SET Nombre = @Nombre, Fecha_Inicio = @Fecha_Inicio, Fecha_Final = @Fecha_Final, ID_Tipo_Actividad = @ID_Tipo_Actividad, Privada = @Privada WHERE ID = @ID";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@Nombre", reto.Nombre);
                         cmd.Parameters.AddWithValue("@Fecha_Inicio", reto.Fecha_Inicio);
-                        cmd.Parameters.AddWithValue("@Fecha_Inicial", reto.Fecha_Inicial);
+                        cmd.Parameters.AddWithValue("@Fecha_Final", reto.Fecha_Final);
                         cmd.Parameters.AddWithValue("@ID_Tipo_Actividad", reto.ID_Tipo_Actividad);
+                        cmd.Parameters.AddWithValue("@Privada", reto.Privada);
                         cmd.Parameters.AddWithValue("@ID", reto.ID);
+                        
 
                         con.Open();
                         int i = cmd.ExecuteNonQuery();

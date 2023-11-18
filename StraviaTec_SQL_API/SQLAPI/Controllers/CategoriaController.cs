@@ -36,7 +36,8 @@ namespace SQLAPI.Controllers
                             {
                                 ID = Convert.ToInt32(sdr["ID"]),
                                 Nombre = Convert.ToString(sdr["Nombre"]),
-                                Edad = Convert.ToInt32(sdr["Edad"])
+                                Edad_Min = Convert.ToInt32(sdr["Edad_Min"]),
+                                Edad_Max = Convert.ToInt32(sdr["Edad_Max"])
                             });
                         }
                     }
@@ -69,7 +70,8 @@ namespace SQLAPI.Controllers
                             {
                                 ID = Convert.ToInt32(sdr["ID"]),
                                 Nombre = Convert.ToString(sdr["Nombre"]),
-                                Edad = Convert.ToInt32(sdr["Edad"])
+                                Edad_Min = Convert.ToInt32(sdr["Edad_Min"]),
+                                Edad_Max = Convert.ToInt32(sdr["Edad_Max"])
                             };
                         }
                     }
@@ -94,12 +96,13 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Categoria VALUES (@ID, @Nombre, @Edad)";
+                string query = "INSERT INTO Categoria VALUES (@ID, @Nombre, @Edad_Min, @Edad_Max)";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ID", categoria.ID);
                     cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
-                    cmd.Parameters.AddWithValue("@Edad", categoria.Edad);
+                    cmd.Parameters.AddWithValue("@Edad_Min", categoria.Edad_Min);
+                    cmd.Parameters.AddWithValue("@Edad_Max", categoria.Edad_Max);
 
                     con.Open();
                     int i = cmd.ExecuteNonQuery();
@@ -124,13 +127,15 @@ namespace SQLAPI.Controllers
 
             if (ModelState.IsValid)
             {
-                string query = "UPDATE Categoria SET Nombre = @Nombre, Edad = @Edad WHERE ID = @ID";
+                string query = "UPDATE Categoria SET Nombre = @Nombre, Edad_Min = @Edad_Min, Edad_Max = @Edad_Max WHERE ID = @ID";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
+                        
                         cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
-                        cmd.Parameters.AddWithValue("@Edad", categoria.Edad);
+                        cmd.Parameters.AddWithValue("@Edad_Min", categoria.Edad_Min);
+                        cmd.Parameters.AddWithValue("@Edad_Max", categoria.Edad_Max);
                         cmd.Parameters.AddWithValue("@ID", categoria.ID);
 
                         con.Open();
@@ -153,11 +158,9 @@ namespace SQLAPI.Controllers
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "DELETE FROM Categoria WHERE ID = @ID";
+                string query = "DELETE FROM Categoria WHERE ID = " + id;
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    cmd.Parameters.AddWithValue("@ID", id);
-
                     con.Open();
                     int i = cmd.ExecuteNonQuery();
                     if (i > 0)

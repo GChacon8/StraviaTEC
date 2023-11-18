@@ -37,8 +37,7 @@ namespace SQLAPI.Controllers
                                 Nombre_Comercial = Convert.ToString(sdr["Nombre_Comercial"]),
                                 Representante = Convert.ToString(sdr["Representante"]),
                                 Telefono = Convert.ToString(sdr["Telefono"]),
-                                Logo_Nombre = Convert.ToString(sdr["Logo_Nombre"]),
-                                Datos_Archivo = (byte[])sdr["Datos_Archivo"]
+                                Logo = Convert.ToString(sdr["Logo"])
                             });
                         }
                     }
@@ -72,8 +71,7 @@ namespace SQLAPI.Controllers
                                 Nombre_Comercial = Convert.ToString(sdr["Nombre_Comercial"]),
                                 Representante = Convert.ToString(sdr["Representante"]),
                                 Telefono = Convert.ToString(sdr["Telefono"]),
-                                Logo_Nombre = Convert.ToString(sdr["Logo_Nombre"]),
-                                Datos_Archivo = (byte[])sdr["Datos_Archivo"]
+                                Logo = Convert.ToString(sdr["Logo"])
                             };
                         }
                     }
@@ -98,14 +96,14 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Patrocinador VALUES (@Nombre_Comercial, @Representante, @Telefono, @Logo_Nombre, @Datos_Archivo)";
+                string query = "INSERT INTO Patrocinador VALUES (@Nombre_Comercial, @Representante, @Telefono, @Logo)";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@Nombre_Comercial", patrocinador.Nombre_Comercial);
                     cmd.Parameters.AddWithValue("@Representante", patrocinador.Representante);
                     cmd.Parameters.AddWithValue("@Telefono", patrocinador.Telefono);
-                    cmd.Parameters.AddWithValue("@Logo_Nombre", patrocinador.Logo_Nombre);
-                    cmd.Parameters.AddWithValue("@Datos_Archivo", patrocinador.Datos_Archivo);
+                    cmd.Parameters.AddWithValue("@Logo", patrocinador.Logo);
+
 
                     con.Open();
                     int i = cmd.ExecuteNonQuery();
@@ -130,15 +128,14 @@ namespace SQLAPI.Controllers
 
             if (ModelState.IsValid)
             {
-                string query = "UPDATE Patrocinador SET Representante = @Representante, Telefono = @Telefono, Logo_Nombre = @Logo_Nombre, Datos_Archivo = @Datos_Archivo WHERE Nombre_Comercial = @Nombre_Comercial";
+                string query = "UPDATE Patrocinador SET Representante = @Representante, Telefono = @Telefono, Logo = @Logo WHERE Nombre_Comercial = @Nombre_Comercial";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@Representante", patrocinador.Representante);
                         cmd.Parameters.AddWithValue("@Telefono", patrocinador.Telefono);
-                        cmd.Parameters.AddWithValue("@Logo_Nombre", patrocinador.Logo_Nombre);
-                        cmd.Parameters.AddWithValue("@Datos_Archivo", patrocinador.Datos_Archivo);
+                        cmd.Parameters.AddWithValue("@Logo", patrocinador.Logo);
                         cmd.Parameters.AddWithValue("@Nombre_Comercial", patrocinador.Nombre_Comercial);
 
                         con.Open();

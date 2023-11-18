@@ -31,15 +31,15 @@ namespace SQLAPI.Controllers
                         {
                             actividades.Add(new Actividad
                             {
+      
                                 ID = Convert.ToInt32(sdr["ID"]),
-                                Duracion = (TimeOnly)sdr["Duracion"],
-                                Hora = (TimeOnly)sdr["Hora"],
-                                Fecha = Convert.ToString(sdr["Fecha"]),
+                                Hora = Convert.ToDateTime(sdr["Hora"]),
+                                Fecha = Convert.ToDateTime(sdr["Fecha"]),
                                 Kilometros = Convert.ToInt32(sdr["Kilometros"]),
-                                Mapa_Nombre = Convert.ToString(sdr["Mapa_Nombre"]),
-                                Datos_Archivo = (byte[])sdr["Datos_Archivo"],
                                 ID_Deportista = Convert.ToString(sdr["ID_Deportista"]),
-                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"])
+                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"]),
+                                Mapa = Convert.ToString(sdr["Mapa"]),
+                                Duracion = Convert.ToInt32(sdr["Duracion"])
                             });
                         }
                     }
@@ -68,14 +68,13 @@ namespace SQLAPI.Controllers
                             actividad = new Actividad
                             {
                                 ID = Convert.ToInt32(sdr["ID"]),
-                                Duracion = (TimeOnly)sdr["Duracion"],
-                                Hora = (TimeOnly)sdr["Hora"],
-                                Fecha = Convert.ToString(sdr["Fecha"]),
+                                Hora = Convert.ToDateTime(sdr["Hora"]),
+                                Fecha = Convert.ToDateTime(sdr["Fecha"]),
                                 Kilometros = Convert.ToInt32(sdr["Kilometros"]),
-                                Mapa_Nombre = Convert.ToString(sdr["Mapa_Nombre"]),
-                                Datos_Archivo = (byte[])sdr["Datos_Archivo"],
                                 ID_Deportista = Convert.ToString(sdr["ID_Deportista"]),
-                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"])
+                                ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"]),
+                                Mapa = Convert.ToString(sdr["Mapa"]),
+                                Duracion = Convert.ToInt32(sdr["Duracion"])
                             };
                         }
                     }
@@ -99,7 +98,7 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Actividad VALUES (@ID, @Duracion, @Hora, @Fecha, @Kilometros, @Mapa_Nombre, @Datos_Archivo, @ID_Deportista, @ID_Tipo_Actividad)";
+                string query = "INSERT INTO Actividad VALUES (@ID,  @Hora, @Fecha, @Kilometros,  @ID_Deportista, @ID_Tipo_Actividad, @Mapa, @Duracion )";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ID", actividad.ID);
@@ -107,10 +106,10 @@ namespace SQLAPI.Controllers
                     cmd.Parameters.AddWithValue("@Hora", actividad.Hora);
                     cmd.Parameters.AddWithValue("@Fecha", actividad.Fecha);
                     cmd.Parameters.AddWithValue("@Kilometros", actividad.Kilometros);
-                    cmd.Parameters.AddWithValue("@Mapa_Nombre", actividad.Mapa_Nombre);
-                    cmd.Parameters.AddWithValue("@Datos_Archivo", actividad.Datos_Archivo);
+                    cmd.Parameters.AddWithValue("@Mapa", actividad.Mapa);
                     cmd.Parameters.AddWithValue("@ID_Deportista", actividad.ID_Deportista);
                     cmd.Parameters.AddWithValue("@ID_Tipo_Actividad", actividad.ID_Tipo_Actividad);
+
                     con.Open();
                     int i = cmd.ExecuteNonQuery();
                     if (i > 0)
@@ -134,7 +133,7 @@ namespace SQLAPI.Controllers
             if (ModelState.IsValid)
             {
                 string query = "UPDATE Actividad SET Duracion = @Duracion, Hora = @Hora, Fecha = @Fecha, Kilometros = @Kilometros, " +
-                               "Mapa_Nombre = @Mapa_Nombre, Datos_Archivo = @Datos_Archivo, ID_Deportista = @ID_Deportista, " +
+                               "Mapa = @Mapa, ID_Deportista = @ID_Deportista, " +
                                "ID_Tipo_Actividad = @ID_Tipo_Actividad WHERE ID = @ID";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -144,8 +143,7 @@ namespace SQLAPI.Controllers
                         cmd.Parameters.AddWithValue("@Hora", actividad.Hora);
                         cmd.Parameters.AddWithValue("@Fecha", actividad.Fecha);
                         cmd.Parameters.AddWithValue("@Kilometros", actividad.Kilometros);
-                        cmd.Parameters.AddWithValue("@Mapa_Nombre", actividad.Mapa_Nombre);
-                        cmd.Parameters.AddWithValue("@Datos_Archivo", actividad.Datos_Archivo);
+                        cmd.Parameters.AddWithValue("@Mapa", actividad.Mapa);
                         cmd.Parameters.AddWithValue("@ID_Deportista", actividad.ID_Deportista);
                         cmd.Parameters.AddWithValue("@ID_Tipo_Actividad", actividad.ID_Tipo_Actividad);
                         cmd.Parameters.AddWithValue("@ID", actividad.ID);

@@ -92,9 +92,10 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Tipo_Actividad VALUES (@tipo)";
+                string query = "INSERT INTO Tipo_Actividad VALUES (@ID, @tipo)";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    cmd.Parameters.AddWithValue("@ID", tipoActividad.ID);
                     cmd.Parameters.AddWithValue("@tipo", tipoActividad.tipo);
 
                     con.Open();

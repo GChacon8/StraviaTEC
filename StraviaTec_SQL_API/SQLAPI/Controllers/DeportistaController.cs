@@ -40,9 +40,8 @@ namespace SQLAPI.Controllers
                                 Nombre2 = Convert.ToString(sdr["Nombre2"]),
                                 Apellido1 = Convert.ToString(sdr["Apellido1"]),
                                 Apellido2 = Convert.ToString(sdr["Apellido2"]),
-                                Nacimiento = Convert.ToString(sdr["Nacimiento"]),
-                                Foto_nombre = Convert.ToString(sdr["Foto_nombre"]),
-                                Datos_Archivo = (byte[])sdr["Datos_Archivo"],
+                                Nacimiento = Convert.ToDateTime(sdr["Nacimiento"]),
+                                Foto = Convert.ToString(sdr["Foto"]),
                                 ID_Amigo = Convert.ToString(sdr["ID_Amigo"]),
                                 ID_Nacionalidad = Convert.ToInt32(sdr["ID_Nacionalidad"])
                             });
@@ -81,9 +80,8 @@ namespace SQLAPI.Controllers
                                 Nombre2 = Convert.ToString(sdr["Nombre2"]),
                                 Apellido1 = Convert.ToString(sdr["Apellido1"]),
                                 Apellido2 = Convert.ToString(sdr["Apellido2"]),
-                                Nacimiento = Convert.ToString(sdr["Nacimiento"]),
-                                Foto_nombre = Convert.ToString(sdr["Foto_nombre"]),
-                                Datos_Archivo = (byte[])sdr["Datos_Archivo"],
+                                Nacimiento = Convert.ToDateTime(sdr["Nacimiento"]),
+                                Foto = Convert.ToString(sdr["Foto"]),
                                 ID_Amigo = Convert.ToString(sdr["ID_Amigo"]),
                                 ID_Nacionalidad = Convert.ToInt32(sdr["ID_Nacionalidad"])
                             };
@@ -110,7 +108,7 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Deportista VALUES (@Usuario, @Contrasena, @Nombre1, @Nombre2, @Apellido1, @Apellido2, @Nacimiento, @Foto_nombre, @Datos_Archivo, @ID_Amigo, @ID_Nacionalidad)";
+                string query = "INSERT INTO Deportista VALUES (@Usuario, @Contrasena, @Nombre1, @Nombre2, @Apellido1, @Apellido2, @Nacimiento, @ID_Amigo, @ID_Nacionalidad, @Foto)";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@Usuario", deportista.Usuario);
@@ -120,8 +118,7 @@ namespace SQLAPI.Controllers
                     cmd.Parameters.AddWithValue("@Apellido1", deportista.Apellido1);
                     cmd.Parameters.AddWithValue("@Apellido2", deportista.Apellido2);
                     cmd.Parameters.AddWithValue("@Nacimiento", deportista.Nacimiento);
-                    cmd.Parameters.AddWithValue("@Foto_nombre", deportista.Foto_nombre);
-                    cmd.Parameters.AddWithValue("@Datos_Archivo", deportista.Datos_Archivo);
+                    cmd.Parameters.AddWithValue("@Foto", deportista.Foto);
                     cmd.Parameters.AddWithValue("@ID_Amigo", deportista.ID_Amigo);
                     cmd.Parameters.AddWithValue("@ID_Nacionalidad", deportista.ID_Nacionalidad);
 
@@ -148,7 +145,7 @@ namespace SQLAPI.Controllers
 
             if (ModelState.IsValid)
             {
-                string query = "UPDATE Deportista SET Contrasena = @Contrasena, Nombre1 = @Nombre1, Nombre2 = @Nombre2, Apellido1 = @Apellido1, Apellido2 = @Apellido2, Nacimiento = @Nacimiento, Foto_nombre = @Foto_nombre, Datos_Archivo = @Datos_Archivo, ID_Amigo = @ID_Amigo, ID_Nacionalidad = @ID_Nacionalidad WHERE Usuario = @Usuario";
+                string query = "UPDATE Deportista SET Contrasena = @Contrasena, Nombre1 = @Nombre1, Nombre2 = @Nombre2, Apellido1 = @Apellido1, Apellido2 = @Apellido2, Nacimiento = @Nacimiento, Foto = @Foto, ID_Amigo = @ID_Amigo, ID_Nacionalidad = @ID_Nacionalidad WHERE Usuario = @Usuario";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, con))
@@ -159,8 +156,7 @@ namespace SQLAPI.Controllers
                         cmd.Parameters.AddWithValue("@Apellido1", deportista.Apellido1);
                         cmd.Parameters.AddWithValue("@Apellido2", deportista.Apellido2);
                         cmd.Parameters.AddWithValue("@Nacimiento", deportista.Nacimiento);
-                        cmd.Parameters.AddWithValue("@Foto_nombre", deportista.Foto_nombre);
-                        cmd.Parameters.AddWithValue("@Datos_Archivo", deportista.Datos_Archivo);
+                        cmd.Parameters.AddWithValue("@Foto", deportista.Foto);
                         cmd.Parameters.AddWithValue("@ID_Amigo", deportista.ID_Amigo);
                         cmd.Parameters.AddWithValue("@ID_Nacionalidad", deportista.ID_Nacionalidad);
                         cmd.Parameters.AddWithValue("@Usuario", deportista.Usuario);
