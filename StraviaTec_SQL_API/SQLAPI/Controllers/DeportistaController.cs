@@ -12,7 +12,7 @@ namespace SQLAPI.Controllers
     [ApiController]
     public class DeportistaController : ControllerBase
     {
-        //private string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         // GET: api/Deportista
         [HttpGet]
@@ -21,12 +21,12 @@ namespace SQLAPI.Controllers
             List<Deportista> deportistas = new List<Deportista>();
             string query = "SELECT * FROM Deportista";
 
-            //using (SqlConnection con = new SqlConnection(constr))
-            using (SqlConnection con = DatabaseConnection.GetConnection())
+            using (SqlConnection con = new SqlConnection(constr))
+            //using (SqlConnection con = DatabaseConnection.GetConnection())
             
             {
-                //using (SqlCommand cmd = new SqlCommand(query))
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new SqlCommand(query))
+                //using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Connection = con;
                     con.Open();

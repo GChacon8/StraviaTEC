@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj": {}
+    "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\sqlApi\\SQLAPI.csproj": {}
   },
   "projects": {
-    "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj": {
+    "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\sqlApi\\SQLAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj",
+        "projectUniqueName": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\sqlApi\\SQLAPI.csproj",
         "projectName": "SQLAPI",
-        "projectPath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\SQLAPI.csproj",
+        "projectPath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\sqlApi\\SQLAPI.csproj",
         "packagesPath": "C:\\Users\\noemi\\.nuget\\packages\\",
-        "outputPath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\SQLAPI\\obj\\",
+        "outputPath": "D:\\Bases\\Proyecto2\\StraviaTec\\StraviaTEC\\StraviaTec_SQL_API\\sqlApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\noemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
