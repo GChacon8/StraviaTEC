@@ -12,16 +12,19 @@ namespace SQLAPI.Controllers
     [ApiController]
     public class ActividadController : ControllerBase
     {
-        string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Actividad>>> GetAllActividades()
         {
             List<Actividad> actividades = new List<Actividad>();
             string query = "SELECT * FROM Actividad";
-            using (SqlConnection con = new SqlConnection(constr))
+            //using (SqlConnection con = new SqlConnection(constr))
+            using (SqlConnection con = DatabaseConnection.GetConnection())
+
             {
-                using (SqlCommand cmd = new SqlCommand(query))
+                //using (SqlCommand cmd = new SqlCommand(query))
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Connection = con;
                     con.Open();

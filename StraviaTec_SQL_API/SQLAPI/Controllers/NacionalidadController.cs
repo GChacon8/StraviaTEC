@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using SQLAPI.Model;
+using System.Collections;
 
 namespace SQLAPI.Controllers
 {
@@ -12,7 +13,13 @@ namespace SQLAPI.Controllers
     [ApiController]
     public class NacionalidadController : ControllerBase
     {
-        string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+        //using (SqlConnection con = DatabaseConnection.GetConnection())
+        //{
+        //using (SqlConnection con = DatabaseConnection.GetConnection())
+        //using (SqlCommand cmd = new SqlCommand(query, con))
+        // {
 
         // GET: api/Nacionalidad
         [HttpGet]
@@ -20,9 +27,11 @@ namespace SQLAPI.Controllers
         {
             List<Nacionalidad> nacionalidades = new List<Nacionalidad>();
             string query = "SELECT * FROM Nacionalidad";
-            using (SqlConnection con = new SqlConnection(constr))
+            //using (SqlConnection con = new SqlConnection(constr))
+            using (SqlConnection con = DatabaseConnection.GetConnection())
             {
-                using (SqlCommand cmd = new SqlCommand(query))
+                //using (SqlCommand cmd = new SqlCommand(query))
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Connection = con;
                     con.Open();
