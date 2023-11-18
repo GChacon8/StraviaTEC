@@ -1,0 +1,97 @@
+.navbarr {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  background-color: black;
+}
+
+
+
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  padding: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*espacio para colocar las publicaciones de los usuarios, el feed de stravia*/
+.publications{
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgb(230, 196, 152);
+  text-align: center;
+  max-width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.Admin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: calc(max-width - 10%);
+  padding: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: aqua;
+}
+
+.search {
+  width: 99%;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 15px;
+  background-color: rgb(0, 243, 36);
+}
+
+
+
+.userinfo{
+  margin-top: 15px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  border-color: black;
+}
+
+
+.post{
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  justify-content: center;
+  background-color: white;
+  border:2px solid #000000;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.comment_button{
+  align-self: flex-start;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: rgb(208, 205, 37);
+  border-color: black;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1000;
+}
