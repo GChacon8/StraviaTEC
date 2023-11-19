@@ -12,14 +12,11 @@ function Reto() {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
-    // Use Axios to make the request
     axios.get('https://localhost:7170/api/Reto')
       .then(response => {
-        // Update the state with the result when the promise is fulfilled
         setResult(response.data);
       })
       .catch(error => {
-        // Handle errors here
         console.error('Error:', error);
       });
   }, []);

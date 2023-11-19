@@ -8,17 +8,17 @@ using SQLAPI.Model;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ObtenerActividadesController : ControllerBase
+public class ObtenerActividadesDeAmigosController : ControllerBase
 {
     private string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
     [HttpPost("ObtenerActividadesDeAmigos")]
-    [ProducesResponseType(typeof(List<Actividad>), 200)] // Cambia Actividad por el tipo de tus resultados
+    [ProducesResponseType(typeof(List<Actividad>), 200)]
     public async Task<IActionResult> ObtenerActividadesDeAmigos([FromBody] ObtenerActividadesDeAmigosRequest request)
     {
         try
         {
-            List<Actividad> actividades = new List<Actividad>(); // Cambia Actividad por el tipo de tus resultados
+            List<Actividad> actividades = new List<Actividad>();
 
             using (SqlConnection connection = new SqlConnection(constr))
             {
@@ -27,13 +27,13 @@ public class ObtenerActividadesController : ControllerBase
                 using (SqlCommand cmd = new SqlCommand("ObtenerActividadesDeAmigos", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@UsuariDeportista", SqlDbType.VarChar) { Value = request.NombreDeportista });
+                    cmd.Parameters.Add(new SqlParameter("@UsuarioDeportista", SqlDbType.VarChar) { Value = request.NombreDeportista });
 
                     using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
                         while (reader.Read())
                         {
-                            // Construir objetos Actividad (o tu tipo) a partir de los resultados
+                            // Construct Actividad objects from the results
                             Actividad actividad = new Actividad
                             {
                                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
@@ -41,7 +41,7 @@ public class ObtenerActividadesController : ControllerBase
                                 Fecha_Hora = reader.GetDateTime(reader.GetOrdinal("Fecha_Hora")),
                                 Kilometros = reader.GetInt32(reader.GetOrdinal("Kilometros")),
                                 Mapa = reader.GetString(reader.GetOrdinal("Mapa")),
-                                ID_Deportista = reader.GetString(reader.GetOrdinal("NombreDeportista")),
+                                ID_Deportista = reader.GetString(reader.GetOrdinal("ID_Deportista")),
                                 ID_Tipo_Actividad = reader.GetInt32(reader.GetOrdinal("ID_Tipo_Actividad")),
                                 Cord = reader.GetString(reader.GetOrdinal("Cord"))
                             };
@@ -52,7 +52,7 @@ public class ObtenerActividadesController : ControllerBase
                 }
             }
 
-            return Ok(actividades); // Devolver la lista como JSON
+            return Ok(actividades);
         }
         catch (Exception ex)
         {
@@ -60,5 +60,3 @@ public class ObtenerActividadesController : ControllerBase
         }
     }
 }
-
-
