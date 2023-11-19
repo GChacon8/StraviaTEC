@@ -25,7 +25,7 @@ function Login() {
    
       Cookies.set('userInfo', username, { expires: 1 });
       console.log('Cookie creada');
-      navigate('/User_view');
+      navigate('/StraviaTec');
     } else {
       console.log('Credenciales incorrectas');
       setErrorMessage('Usuario o contraseña incorrectos');

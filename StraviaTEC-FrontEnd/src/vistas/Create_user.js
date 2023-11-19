@@ -37,7 +37,10 @@ function Create_user() {
     console.log(age);
 
    navigate('/');
-  
+  };
+
+  const handleBack=()=>{
+    navigate('/');
   };
 
   return (
@@ -126,6 +129,9 @@ function Create_user() {
         <div className="col-12">
           <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleCreateUser}>
             Crear Usuario
+          </button>
+          <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold', marginLeft:'20px' }} onClick={handleBack}>
+            Volver
           </button>
         </div>
       </form>
