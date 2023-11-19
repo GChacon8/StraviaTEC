@@ -89,20 +89,20 @@ Primary Key ("Nombre_Comercial")
 
 Create Table DeportistaXGrupo(
 "ID_Deportista" varchar(30) not null,
-"ID_Grupo" int not null unique,
+"ID_Grupo" int not null,
 Primary Key("ID_Deportista")
 );
 
 
 Create Table "DeportistaXReto"(
 "ID_Deportista" varchar(30) not null,
-"ID_Reto" int not null unique,
+"ID_Reto" int not null ,
 Primary Key("ID_Deportista")
 );
 
 Create Table "DeportistaXCarrera"(
 "ID_Deportista" varchar(30) not null,
-"ID_Carrera" varchar(20) not null unique,
+"ID_Carrera" varchar(20) not null,
 Tiempo time,
 Primary Key("ID_Deportista")
 );
@@ -115,19 +115,19 @@ Primary Key("ID_Grupo")
 
 Create Table "GrupoXCarrera"(
 "ID_Grupo" int not null,
-"ID_Carrera" varchar(20) not null unique,
+"ID_Carrera" varchar(20) not null,
 Primary Key("ID_Grupo")
 );
 
 Create Table "PatrocinadorXReto"(
 "ID_Patrocinador" varchar(30) not null,
-"ID_Reto" int not null unique,
+"ID_Reto" int not null,
 Primary Key("ID_Patrocinador")
 );
 
 Create Table "PatrocinadorXCarrera"(
 "ID_Patrocinador" varchar(30) not null,
-"ID_Carrera" varchar(20) not null unique,
+"ID_Carrera" varchar(20) not null,
 Primary Key("ID_Patrocinador")
 );
 
