@@ -1467,11 +1467,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+      "projectUniqueName": "C:\\Users\\jpesq\\Documents\\GitHub\\StraviaTEC1\\SQLAPI (1)\\SQLAPI.csproj",
       "projectName": "SQLAPI",
-      "projectPath": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+      "projectPath": "C:\\Users\\jpesq\\Documents\\GitHub\\StraviaTEC1\\SQLAPI (1)\\SQLAPI.csproj",
       "packagesPath": "C:\\Users\\jpesq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\obj\\",
+      "outputPath": "C:\\Users\\jpesq\\Documents\\GitHub\\StraviaTEC1\\SQLAPI (1)\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jpesq\\AppData\\Roaming\\NuGet\\NuGet.Config",

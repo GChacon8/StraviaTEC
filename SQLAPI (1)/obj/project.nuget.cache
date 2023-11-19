@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aqJDy1OPjT9q9K7XMF278cuwGP2Rslf6PVBPKJDxeM/7h0F0DeBNbNEsky2zv9uw32KgRp+n3e+TwCN4rkRB0Q==",
+  "dgSpecHash": "X83DUVNayXCnX0mww4yrX6PalWxRMFZ3QxvHQJl6FuEShUUpAugKKDc+mNwV0qzh74Nbqk3K4fy2kZfQ1NQdrg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+  "projectFilePath": "C:\\Users\\jpesq\\Documents\\GitHub\\StraviaTEC1\\SQLAPI (1)\\SQLAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jpesq\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\jpesq\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

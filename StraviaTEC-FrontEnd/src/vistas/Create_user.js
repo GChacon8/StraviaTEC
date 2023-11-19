@@ -1,64 +1,135 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
-import '../Css/Styles.css'; 
+import '../Css/Styles.css';
+
+
 
 function Create_user() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [nationality, setNationality] = useState('');
+  const [photo, setPhoto] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'username') {
-      setUsername(value);
-    } else if (name === 'password') {
-      setPassword(value);
+  // Calcula la edad tomando en cuenta la fecha de nacimiento
+  const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
     }
+    return age;
   };
 
-  // Verificación del usuario y contraseña del admin
-  const handleSubmit = () => {
-    if (username === 'admin' && password === 'admin') {
-      console.log('VISTA DE CREACIÓN DE USUARIO');
-      navigate('/TecAir');
-    } else {
-      console.log('Credenciales incorrectas');
-      //navigate('/ClientView');
-    }
+  // Función para manejar el envío del formulario
+  const handleCreateUser = (event) => {
+    event.preventDefault();
+    console.log('creación del usuarioooooo');
+
+    // Calcula la edad
+    const age = calculateAge(birthDate);
+    console.log(age);
+
+   navigate('/');
+  
   };
 
   return (
+    <div className="create-user">
+      <h2 className="text-center">Crear Nuevo Usuario</h2>
+      <form onSubmit={handleCreateUser} className="row">
+        <div className="col-12">
+          <label htmlFor="firstName" className="form-label">Nombre:</label>
+          <input
+            type="text"
+            id="firstName"
+            className="form-control"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="lastName" className="form-label">Apellidos:</label>
+          <input
+            type="text"
+            id="lastName"
+            className="form-control"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="birthDate" className="form-label">Fecha de Nacimiento:</label>
+          <input
+            type="date"
+            id="birthDate"
+            className="form-control"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="nationality" className="form-label">Nacionalidad:</label>
+          <input
+            type="text"
+            id="nationality"
+            className="form-control"
+            value={nationality}
+            onChange={(e) => setNationality(e.target.value)}
+            required
+          />
+        </div>
 
-    <div className="login">
-      <h1>Creación de Usuario</h1>
-      <div>
-        <label htmlFor="username">Usuario:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={handleInputChange}
-          style={{ marginBottom: '10px'}}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={handleInputChange}
-          style={{ marginBottom: '10px'}}
-        />
-      </div>
-      <button className="btn btn-primary .btn-xs" onClick={handleSubmit}>
-        Iniciar Sesión
-      </button>
+        <div className="col-12">
+          <label htmlFor="username" className="form-label">Usuario:</label>
+          <input
+            type="text"
+            id="username"
+            className="form-control"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="password" className="form-label">Contraseña:</label>
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="photo" className="form-label">Foto:</label>
+          <input
+            type="file"
+            id="photo"
+            className="form-control"
+            style={{ marginBottom: '20px' }}
+            accept="image/*"
+            onChange={(e) => setPhoto(e.target.files[0])}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleCreateUser}>
+            Crear Usuario
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
-
 export default Create_user;

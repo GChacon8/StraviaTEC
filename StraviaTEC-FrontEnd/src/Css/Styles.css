@@ -21,8 +21,22 @@
   flex-direction: column;
   justify-content: center;
 }
+.create-user{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  width: 500px;
+  padding: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-/*espacio para colocar las publicaciones de los usuarios, el feed de stravia*/
+}
+
+/*espacio para colocar las publicaciones de los usuarios, el feed*/
 .publications{
   margin-top: 10px;
   padding: 10px;
@@ -32,7 +46,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
 
 .Admin {
   position: absolute;

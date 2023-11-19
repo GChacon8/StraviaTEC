@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Css/Styles.css'; 
+import Cookies from 'js-cookie';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -17,21 +19,29 @@ function Login() {
     }
   };
 
-  // Verificación del usuario y contraseña del admin
+  //Verificación del usuario y contraseña del usuario
   const handleSubmit = () => {
-    if (username === 'admin' && password === 'admin') {
-      console.log('FELICIDADES HACKEO EL SISTEMA');
-      navigate('/TecAir/Administration');
+    if (password === 'admin') {
+   
+      Cookies.set('userInfo', username, { expires: 1 });
+      console.log('Cookie creada');
+      navigate('/User_view');
     } else {
       console.log('Credenciales incorrectas');
+      setErrorMessage('Usuario o contraseña incorrectos');
       //navigate('/ClientView');
     }
+  };
+
+  const handleCreateUser =()=>{
+    navigate('/Create_user');
+
   };
 
   return (
 
     <div className="login">
-      <h1>TecAir</h1>
+      <h1>StraviaTec</h1>
       <div>
         <label htmlFor="username">Usuario:</label>
         <input
@@ -54,8 +64,12 @@ function Login() {
           style={{ marginBottom: '10px'}}
         />
       </div>
-      <button className="btn btn-primary .btn-xs" onClick={handleSubmit}>
+      {errorMessage && <div className="error-message" style={{color:'red'}}>*{ errorMessage}</div>}
+      <button className="btn btn-outline-dark my-2" style={{fontWeight:'bold'}} onClick={handleSubmit}>
         Iniciar Sesión
+      </button>
+      <button className="btn btn-outline-dark my-2" style={{fontWeight:'bold'}} onClick={handleCreateUser}>
+        Crear Usuario
       </button>
     </div>
   );

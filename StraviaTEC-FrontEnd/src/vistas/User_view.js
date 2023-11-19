@@ -1,32 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Cookies from 'js-cookie';
 
 
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gpx';
-
-
-
-import runTestGPX from '../Images/run_test.gpx';
-
-
-
 import ico from "../Images/Ico.jpg"
 
 function User_view() {
   const [flightsData, setFlightsData] = useState([]);
   const [showCommentModal, setShowCommentModal] = useState(false);
-  const [selectedFlight, setSelectedFlight] = useState(null);
   const [comment, setComment] = useState();
   
 
 
   var [user_info, setUserInfo] = useState([]);
   var [postInfo, setpostInfo] = useState([]);
-  var posiciones = [
+
+  var carrera1 = [
     [9.9383849, -84.1088645],
     [9.93841, -84.10881],
     [9.93844, -84.10874],
@@ -134,7 +128,116 @@ function User_view() {
     [9.93823, -84.109],
     [9.9382333, -84.1090036]
   ];
- 
+  var carrera2 = [
+    [9.9383849, -84.1088645],
+    [9.93841, -84.10881],
+    [9.93844, -84.10874],
+    [9.93845, -84.10864],
+    [9.93845, -84.10863],
+    [9.93845, -84.10855],
+    [9.93844, -84.10844],
+    [9.93843, -84.10826],
+    [9.93842, -84.10807],
+    [9.93841, -84.10788],
+    [9.9384, -84.1077],
+    [9.93839, -84.10751],
+    [9.93838, -84.1074],
+    [9.9383, -84.10604],
+    [9.9383, -84.10603],
+    [9.93828, -84.10568],
+    [9.93824, -84.10495],
+    [9.93823, -84.10477],
+    [9.9382, -84.10421],
+    [9.93814, -84.10328],
+    [9.93807, -84.10215],
+    [9.93806, -84.10119],
+    [9.93802, -84.10028],
+    [9.938, -84.09983],
+    [9.93797, -84.0993],
+    [9.93791, -84.09866],
+    [9.9379075, -84.0986642],
+    [9.93788, -84.09859],
+    [9.9378762, -84.0985881],
+    [9.9378762, -84.0985881],
+    [9.93786, -84.09856],
+    [9.93782, -84.09849],
+    [9.93778, -84.09845],
+    [9.93772, -84.09841],
+    [9.93765, -84.09838],
+    [9.93753, -84.09834],
+    [9.9375263, -84.0983355],
+    [9.9372, -84.09832],
+    [9.93661, -84.09829],
+    [9.93629, -84.09828],
+    [9.93584, -84.09827],
+    [9.93508, -84.09825],
+    [9.93483, -84.09824],
+    [9.9343, -84.09821],
+    [9.93424, -84.09821],
+    [9.93392, -84.09819],
+    [9.93384, -84.09819],
+    [9.93342, -84.09817],
+    [9.93323, -84.09817],
+    [9.93304, -84.09819],
+    [9.93284, -84.09821],
+    [9.9328417, -84.0982058],
+    [9.93283, -84.09821],
+    [9.93276, -84.09825],
+    [9.93268, -84.09831],
+    [9.9326838, -84.0983132],
+    [9.9326838, -84.0983132],
+    [9.93267, -84.09833],
+    [9.93265, -84.09835],
+    [9.93263, -84.09838],
+    [9.93262, -84.09842],
+    [9.93262, -84.09846],
+    [9.93262, -84.0985],
+    [9.93268, -84.09896],
+    [9.93277, -84.09982],
+    [9.93278, -84.09992],
+    [9.9329, -84.10099],
+    [9.93306, -84.10269],
+    [9.93314, -84.10341],
+    [9.93318, -84.10382],
+    [9.93333, -84.10541],
+    [9.93334, -84.10559],
+    [9.93335, -84.10578],
+    [9.93336, -84.10596],
+    [9.93337, -84.10612],
+    [9.93337, -84.10614],
+    [9.93339, -84.10632],
+    [9.93341, -84.1065],
+    [9.93343, -84.10668],
+    [9.93345, -84.10687],
+    [9.93347, -84.10705],
+    [9.93348, -84.10716],
+    [9.93362, -84.10898],
+    [9.93371, -84.10984],
+    [9.93373, -84.11002],
+    [9.9337322, -84.1100219],
+    [9.9337886, -84.1102055],
+    [9.93397, -84.11015],
+    [9.93436, -84.11005],
+    [9.93466, -84.10998],
+    [9.93484, -84.10993],
+    [9.93498, -84.10988],
+    [9.93502, -84.10987],
+    [9.93518, -84.10982],
+    [9.93535, -84.10978],
+    [9.93551, -84.10973],
+    [9.93559, -84.10971],
+    [9.93619, -84.10954],
+    [9.93699, -84.10933],
+    [9.93718, -84.10928],
+    [9.93752, -84.10919],
+    [9.93802, -84.10908],
+    [9.93813, -84.10904],
+    [9.93821, -84.10902],
+    [9.93823, -84.109],
+    [9.9382333, -80.1090036]
+  ];
+  //var posiciones = [carrera1, carrera2];
+
   const [comentarios, setComentarios] = useState([
     { usuario: 'Usuario1', texto: 'Hola' },
     { usuario: 'Usuario2', texto: 'Buenísimo' },
@@ -142,7 +245,6 @@ function User_view() {
   ]);
   
 
-  const [buttonColor, setButtonColor] = useState('btn-secondary');
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -157,6 +259,7 @@ function User_view() {
 
   //Variable para controlar la información del usuario
 
+  
 
 
 
@@ -215,8 +318,14 @@ function User_view() {
   //Función para manejar la búsqueda de usuarios
   const handleSubmit = (e) => {
     e.preventDefault();
-    //searchFlights();
-    console.log("REALIZAR BUSQUEDA DE USUARIOS");
+    //searchFlights(); 
+    console.log('Realizar busqueda de usuario');
+
+    
+    console.log('El usuario iniciado es:');
+    console.log(Cookies.get('userInfo'));
+   
+
   };
 
   const handleComments = (postID) => {
@@ -260,7 +369,8 @@ function User_view() {
       Kilometros: 10,
       Mapa_Nombre: "Ruta 1",
       Datos_Archivo: "",
-      TipoActividad: "Ciclismo"
+      TipoActividad: "Ciclismo",
+      Ruta: carrera1
     },
     {
       ID: 2,
@@ -272,9 +382,11 @@ function User_view() {
       Kilometros: 5,
       Mapa_Nombre: "Ruta 2",
       Datos_Archivo: "",
-      TipoActividad: "Running"
+      TipoActividad: "Running",
+      Ruta: carrera2
     }
   ];
+
 
 
 
@@ -363,13 +475,13 @@ function User_view() {
 
                 {/* Agregar la ruta gpx */}
                 <div>
-                  <MapContainer center={[9.936458, -84.104179]} zoom={13} style={{ height: '200px' }} scrollWheelZoom={true}>
+                  <MapContainer center={post.Ruta[0]} zoom={13} style={{ height: '200px' }} scrollWheelZoom={true}>
                     <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <Polyline pathOptions={{ fillColor: 'red', color: 'blue' }}
-                      positions={posiciones} />
+                      positions={post.Ruta} />
                   </MapContainer>
                 </div>
                 <button className="btn comment_button" onClick={handleComments}>Comentarios</button>
