@@ -511,7 +511,7 @@ function Admin_Carreras() {
                     </div>
                 ))}
                 <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleCreateCarrera}>
-                    Agregar Reto
+                    Agregar Carrera
                 </button>
             </div>
 
@@ -572,6 +572,7 @@ function Admin_Carreras() {
                     <input
                       type="file"
                       name="recorrido"
+                      accept = ".gpx"
                       style={{marginBottom:'20px', marginLeft:'20px'}}
                       onChange={handleInputChange}
                     />

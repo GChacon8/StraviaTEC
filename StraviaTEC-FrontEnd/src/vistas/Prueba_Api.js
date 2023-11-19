@@ -6,11 +6,15 @@ import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const getNacionalidades = async () => {
+let answer;
+
+async function getNacionalidades() {
     try {
-        console.log(apiUrl);
-        const response = await axios.get('https://localhost:7170/api/Nacionalidad');
-        console.log(response.data);
+        //console.log(apiUrl);
+        const response = await axios.get('https://localhost:7170/api/Reto');
+
+        console.log(response.data[0].id);
+        //return(response.data);
     } catch (error) {console.error('Error:', error)}
 }
 
