@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 
@@ -11,10 +11,9 @@ import 'leaflet-gpx';
 import ico from "../Images/Ico.jpg"
 
 function User_view() {
-  const [flightsData, setFlightsData] = useState([]);
   const [showCommentModal, setShowCommentModal] = useState(false);
   const [comment, setComment] = useState();
-  
+  const navigate = useNavigate();
 
 
   var [user_info, setUserInfo] = useState([]);
@@ -236,7 +235,85 @@ function User_view() {
     [9.93823, -84.109],
     [9.9382333, -80.1090036]
   ];
-  //var posiciones = [carrera1, carrera2];
+
+  var GabrielPrueba = [
+    [9.853204562251898, -83.91353428030014],
+    [9.853062916091124, -83.91364442893219],
+    [9.853116414590112, -83.91372137048116],
+    [9.853182176508781, -83.91370236455062],
+    [9.85327034788525, -83.91364999140808],
+    [9.853360005559834, -83.91358251357721],
+    [9.853439229538152, -83.91355457303827],
+    [9.853555231040257, -83.91356287275887],
+    [9.85365489702368, -83.91354098744172],
+    [9.853747429574195, -83.91349642952916],
+    [9.85385060002916, -83.91347817094862],
+    [9.853936334999204, -83.91344195394335],
+    [9.85402230649487, -83.91341128607966],
+    [9.854094236217515, -83.91339706361653],
+    [9.854148588314269, -83.91338945042597],
+    [9.85421486372991, -83.91339664363286],
+    [9.854284269203795, -83.91339454108054],
+    [9.854377087483732, -83.9133399069952],
+    [9.854467953879533, -83.91338394492857],
+    [9.854531199639649, -83.9134645934645],
+    [9.85457094916179, -83.91356480596222],
+    [9.854604219892929, -83.91365175040751],
+    [9.854615862085481, -83.91375178388274],
+    [9.854672768969369, -83.91391518316784],
+    [9.854731152816242, -83.91409692905845],
+    [9.854778724809087, -83.91420654192764],
+    [9.854851612567288, -83.91426131192122],
+    [9.854928656238524, -83.9142658349038],
+    [9.855008419439006, -83.91425055893336],
+    [9.8550750156755, -83.91426194054823],
+    [9.85514523900165, -83.91423334782336],
+    [9.855242540160969, -83.91423250436277],
+    [9.855356653299792, -83.91422073583018],
+    [9.85544712188098, -83.91419904607673],
+    [9.85552640767027, -83.91418843956],
+    [9.85561560470659, -83.91418398684239],
+    [9.85570062406568, -83.91415657793681],
+    [9.855782542919657, -83.9141456879692],
+    [9.855859016238078, -83.91412212371668],
+    [9.855909623135108, -83.91411549579526],
+    [9.855990688912097, -83.91409526505238],
+    [9.856072513711945, -83.91406833067175],
+    [9.856163050865012, -83.91404399302834],
+    [9.856252795614587, -83.9140073556411],
+    [9.856348340924878, -83.9139941660207],
+    [9.856438353488926, -83.91395479285649],
+    [9.856517617661396, -83.91393409930966],
+    [9.8565995011256, -83.9139058239644],
+    [9.856661965287431, -83.91387619020898],
+    [9.856729369697657, -83.91384191967137],
+    [9.856785639572086, -83.91380661952387],
+    [9.856859729299076, -83.9138044828349],
+    [9.85692455120391, -83.9138700009747],
+    [9.856932611459282, -83.91395182499781],
+    [9.85694348322585, -83.91402955108413],
+    [9.85694133353911, -83.91410949684412],
+    [9.85693595031833, -83.9142053281842],
+    [9.8569569317574, -83.91428838096633],
+    [9.8569593233021, -83.91438429440525],
+    [9.856979280007481, -83.91446425389806],
+    [9.856999949349515, -83.91455878966248],
+    [9.856991694806004, -83.91463997312802],
+    [9.857001598472902, -83.91471439112291],
+    [9.857013196747822, -83.9147902147657],
+    [9.857024956454284, -83.91486980073138],
+    [9.85704613721259, -83.9149516183025],
+    [9.857077798338064, -83.91502608043005],
+    [9.857098236515952, -83.91510061951969],
+    [9.857105796668076, -83.91517991956779],
+    [9.857107235507616, -83.91526346743294],
+    [9.857101726371246, -83.91529472956448],
+    [9.857093436556555, -83.91536048392601]
+];
+
+
+  
+  
 
   const [comentarios, setComentarios] = useState([
     { usuario: 'Usuario1', texto: 'Hola' },
@@ -282,50 +359,12 @@ function User_view() {
   };
 
 
-  /*
-  const flightsData = [
-    {
-      id: 1,
-      origin: "Ciudad A",
-      destination: "Ciudad E",
-      departureDate: "2023-10-20",
-      departureTime: "10:00 AM",
-      arrivalTime: "12:00 PM",
-      price: "$200",
-    },
-    {
-      id: 2,
-      origin: "OMG",
-      destination: "CARTAGO",
-      departureDate: "2023-10-20",
-      departureTime: "10:00 AM",
-      arrivalTime: "12:00 PM",
-      price: "$600",
-    },
-    {
-      id: 3,
-      origin: "",
-      destination: "",
-      departureDate: "",
-      departureTime: "",
-      arrivalTime: "",
-      price: "",
-    },
-    //  add vuelos, llamar api
-  ];
-  */
-
   //Función para manejar la búsqueda de usuarios
   const handleSubmit = (e) => {
     e.preventDefault();
-    //searchFlights(); 
     console.log('Realizar busqueda de usuario');
-
-    
     console.log('El usuario iniciado es:');
     console.log(Cookies.get('userInfo'));
-   
-
   };
 
   const handleComments = (postID) => {
@@ -334,6 +373,10 @@ function User_view() {
     setShowCommentModal(true);
     document.body.style.overflow = 'hidden';
   };
+
+  const handleAddActividad =()=>{
+    navigate('/StraviaTec/Agregar_Actividad');
+  }
 
   //Closing the modal
   const handleModalClose = () => {
@@ -370,7 +413,7 @@ function User_view() {
       Mapa_Nombre: "Ruta 1",
       Datos_Archivo: "",
       TipoActividad: "Ciclismo",
-      Ruta: carrera1
+      Ruta: GabrielPrueba
     },
     {
       ID: 2,
@@ -422,16 +465,34 @@ function User_view() {
             </li>
 
           </ul>
+          
+          <ul className="navbar-nav ml-auto d-flex">
+            <li className="nav-item">
+              <Link className="nav-link" to="/StraviaTec/Retos">
+                Retos
+              </Link>
+            </li>
+          </ul>
 
           <ul className="navbar-nav ml-auto d-flex">
-
             <li className="nav-item">
-              <Link className="nav-link" to="/Create_user">
-                Crear Usuario
+              <Link className="nav-link" to="/StraviaTec/Carreras">
+                Carreras
+              </Link>
+            </li>
+          </ul>
+
+          <ul className="navbar-nav ml-auto d-flex">
+            
+            <li className="nav-item">
+              <Link className="nav-link" to="/StraviaTec/Admin_view">
+                Organizador
               </Link>
             </li>
 
           </ul>
+          
+
         </div>
       </nav>
 
@@ -448,7 +509,11 @@ function User_view() {
               <div key={usuario.Usuario} className='user'>
                 <h2>{usuario.Nombre1} {usuario.Nombre2} {usuario.Apellido1}</h2>
                 <p>{usuario.Usuario}</p>
-                <h4>Add other user info</h4>
+
+                <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleAddActividad}>
+            Registrar Actividad
+          </button>
+
               </div>
             ))}
 

@@ -1,201 +1,141 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
-import ico from "../Images/Ico.jpg"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import '../Css/Styles.css';
+
 
 
 function Admin_view() {
-  const [createPromotion, setcreatePromotion] = useState(false);
-  const [Checkin, setcheckin] = useState(false);
-  
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [nationality, setNationality] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    origin: "",
-    destiny: "",
-    price: "",
-    duration: "",
-    image: null, // Usarás este campo para la imagen
-  });
-
-
-  //por si quiero llamar a alguna función desde un button
-  const handleButtonClick = () => {
-    console.log('SOY UN BOTÓN');
-
+  // Calcula la edad tomando en cuenta la fecha de nacimiento
+  const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
   };
 
-  const handleModalClose = () => {
-    setcreatePromotion(false);
+  // Función para manejar el envío del formulario
+  const handleCreateUser = (event) => {
+    event.preventDefault();
+    console.log('creación del usuarioooooo');
+
+    // Calcula la edad
+    const age = calculateAge(birthDate);
+    console.log(age);
+
+   navigate('/');
   };
 
-  const handleAddPromotion = () => {
-    setcreatePromotion(true);
-    console.log("omggg");
-  }
-
-  const handleCheckin = () => {
-    setcheckin(true);
-    console.log("Checkin!");
-
-    navigate('/TecAir/Checkin');
-  }
-  
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleBack=()=>{
+    navigate('/');
   };
-
-  const handleImageUpload = (event) => {
-    const imageFile = event.target.files[0];
-    setFormData({
-      ...formData,
-      image: imageFile,
-    });
-  };
-
-
-
 
   return (
-    <div className='container'>
-      <div>
-        <nav className="navbar navbar-expand-lg  navbar-dark justify-content-between navbarr">
-          <div className="container">
-            <a className="navbar-brand" href="#">
-              <img src={ico} width="50" height="50" alt="" />
-              TecAir
-            </a>
-            <ul className="navbar-nav ml-auto d-flex">
-              <li className="nav-item">
-                <Link className="nav-link" to="/TecAir">
-                  Vista Clientes
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-
-      <div className='Admin'>
-        <h1>Vista de Administrador</h1>
-        <button type="addPromotion" className="btn btn-info space" onClick={() => handleAddPromotion()}>Add Promotion</button>
-        <h1></h1>  
-        <button type="Checkin" className="btn btn-info space" onClick={() => handleCheckin()}>Check in</button>
-      
-      
-      </div>
-
-
-      <div
-          className="modal"
-          tabIndex="-1"
-          role="dialog"
-          style={{ display: createPromotion ? 'block' : 'none' }}
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content align_center">
-              <div className="modal-header">
-                <h5 className="modal-title">Agregar Promoción</h5>
-              </div>
-
-              <div className="modal-body">
-                <h1>Detalles de la Promoción</h1>
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="origin">Origen:</label>
-                    <input
-                      type="text"
-                      id="origin"
-                      name="origin"
-                      value={formData.origin}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="destiny">Destino:</label>
-                    <input
-                      type="text"
-                      id="destiny"
-                      name="destiny"
-                      value={formData.destiny}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="price">Precio:</label>
-                    <input
-                      type="text"
-                      id="price"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="duration">Duración:</label>
-                    <input
-                      type="text"
-                      id="duration"
-                      name="duration"
-                      value={formData.duration}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="image">Imagen:</label>
-                    <input
-                      type="file"
-                      id="image"
-                      name="image"
-                      onChange={handleImageUpload}
-                      accept="image/*"
-                      required
-                    />
-                  </div>
-                </form>
-              </div>
-
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                  onClick={handleModalClose}
-                >
-                  Cerrar
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={handleAddPromotion}
-                >
-                  Agregar Promoción
-                </button>
-              </div>
-            </div>
-          </div>
+    <div className="create-user">
+      <h2 className="text-center">ADMIN VIEWWWW</h2>
+      <form onSubmit={handleCreateUser} className="row">
+        <div className="col-12">
+          <label htmlFor="firstName" className="form-label">Nombre:</label>
+          <input
+            type="text"
+            id="firstName"
+            className="form-control"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="lastName" className="form-label">Apellidos:</label>
+          <input
+            type="text"
+            id="lastName"
+            className="form-control"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="birthDate" className="form-label">Fecha de Nacimiento:</label>
+          <input
+            type="date"
+            id="birthDate"
+            className="form-control"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="nationality" className="form-label">Nacionalidad:</label>
+          <input
+            type="text"
+            id="nationality"
+            className="form-control"
+            value={nationality}
+            onChange={(e) => setNationality(e.target.value)}
+            required
+          />
         </div>
 
-
-
-
-
-
-
-
-
+        <div className="col-12">
+          <label htmlFor="username" className="form-label">Usuario:</label>
+          <input
+            type="text"
+            id="username"
+            className="form-control"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="password" className="form-label">Contraseña:</label>
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <label htmlFor="photo" className="form-label">Foto:</label>
+          <input
+            type="file"
+            id="photo"
+            className="form-control"
+            style={{ marginBottom: '20px' }}
+            accept="image/*"
+            onChange={(e) => setPhoto(e.target.files[0])}
+            required
+          />
+        </div>
+        <div className="col-12">
+          <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleCreateUser}>
+            Crear Usuario
+          </button>
+          <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold', marginLeft:'20px' }} onClick={handleBack}>
+            Volver
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
-
 export default Admin_view;
