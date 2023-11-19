@@ -1,6 +1,6 @@
 CREATE PROCEDURE UnirseReto
     @NombreDeportista varchar(30),
-    @ID_Reto int
+    @NombreReto varchar(20)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -12,8 +12,8 @@ BEGIN
         RETURN;
     END
 
-    -- Verificar si el reto existe
-    IF NOT EXISTS (SELECT 1 FROM Reto WHERE ID = @ID_Reto)
+    -- Verificar si la carrera existe
+    IF NOT EXISTS (SELECT 1 FROM Reto WHERE Nombre = @NombreReto)
     BEGIN
         PRINT 'Error: El reto no existe.';
         RETURN;
@@ -23,31 +23,45 @@ BEGIN
     DECLARE @ID_Deportista varchar(30);
     SET @ID_Deportista = (SELECT Usuario FROM Deportista WHERE Usuario = @NombreDeportista);
 
-    -- Verificar si el deportista ya está registrado en el reto
+    -- Verificar si la carrera es privada
+    DECLARE @RetoPrivada bit;
+    SET @RetoPrivada = (SELECT Privada FROM Reto WHERE Nombre = @NombreReto);
+
+    -- Verificar si el deportista ya está registrado en la carrera
     IF EXISTS (
         SELECT 1
         FROM DeportistaXReto
-        WHERE ID_Deportista = @ID_Deportista AND ID_Reto = @ID_Reto
+        WHERE ID_Deportista = @ID_Deportista AND ID_Reto = @NombreReto
     )
     BEGIN
         PRINT 'Error: El deportista ya está registrado en el reto.';
         RETURN;
     END
 
-    -- Verificar si el reto es privado
-    IF EXISTS (
-        SELECT 1
-        FROM Reto
-        WHERE ID = @ID_Reto AND Privada = 1
-    )
+    -- Si la carrera es privada, verificar si el deportista pertenece a un grupo permitido
+    IF @RetoPrivada = 1
     BEGIN
-        PRINT 'Error: El reto es privado y se requiere ser parte del grupo para unirse.';
-        RETURN;
+        -- Obtener el ID del grupo al que pertenece el deportista
+        DECLARE @ID_Grupo int;
+        SET @ID_Grupo = (SELECT ID_Grupo FROM DeportistaXGrupo WHERE ID_Deportista = @ID_Deportista);
+
+        -- Verificar si el deportista está en un grupo permitido para la carrera
+        IF NOT EXISTS (
+            SELECT 1
+            FROM GrupoXReto as gc
+            INNER JOIN Carrera c ON gc.ID_Reto = c.Nombre
+            WHERE gc.ID_Grupo = @ID_Grupo AND c.Nombre = @NombreReto
+        )
+        BEGIN
+            PRINT 'Error: El deportista no pertenece a un grupo permitido para el reto privado.';
+            RETURN;
+        END
     END
 
-    -- Insertar el registro para asociar al deportista con el reto
-    INSERT INTO DeportistaXReto (ID_Deportista, ID_Reto)
-    VALUES (@ID_Deportista, @ID_Reto);
+    -- Insertar el registro para asociar al deportista con la carrera
+    INSERT INTO DeportistaXReto(ID_Deportista, ID_Reto)
+    VALUES (@ID_Deportista, @NombreReto);
 
-    PRINT 'Deportista se ha unido exitosamente al reto.';
+    PRINT 'Deportista se ha unido exitosamente a la carrera.';
 END;
+

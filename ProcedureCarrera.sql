@@ -23,32 +23,9 @@ BEGIN
     DECLARE @ID_Deportista varchar(30);
     SET @ID_Deportista = (SELECT Usuario FROM Deportista WHERE Usuario = @NombreDeportista);
 
-    -- Obtener el ID del grupo al que pertenece el deportista
-    DECLARE @ID_Grupo int;
-    SET @ID_Grupo = (SELECT ID_Grupo FROM DeportistaXGrupo WHERE ID_Deportista = @ID_Deportista);
-
-    -- Verificar si el deportista está en un grupo permitido para la carrera
-    IF NOT EXISTS (
-        SELECT 1
-        FROM GrupoXCarrera gc
-        INNER JOIN Carrera c ON gc.ID_Carrera = c.Nombre
-        WHERE gc.ID_Grupo = @ID_Grupo AND c.Nombre = @NombreCarrera
-    )
-    BEGIN
-        PRINT 'Error: El deportista no pertenece a un grupo permitido para la carrera.';
-        RETURN;
-    END
-
     -- Verificar si la carrera es privada
-    IF EXISTS (
-        SELECT 1
-        FROM Carrera
-        WHERE Nombre = @NombreCarrera AND Privada= 1
-    )
-    BEGIN
-        PRINT 'Error: La carrera es privada y se requiere invitación para unirse.';
-        RETURN;
-    END
+    DECLARE @CarreraPrivada bit;
+    SET @CarreraPrivada = (SELECT Privada FROM Carrera WHERE Nombre = @NombreCarrera);
 
     -- Verificar si el deportista ya está registrado en la carrera
     IF EXISTS (
@@ -59,6 +36,26 @@ BEGIN
     BEGIN
         PRINT 'Error: El deportista ya está registrado en la carrera.';
         RETURN;
+    END
+
+    -- Si la carrera es privada, verificar si el deportista pertenece a un grupo permitido
+    IF @CarreraPrivada = 1
+    BEGIN
+        -- Obtener el ID del grupo al que pertenece el deportista
+        DECLARE @ID_Grupo int;
+        SET @ID_Grupo = (SELECT ID_Grupo FROM DeportistaXGrupo WHERE ID_Deportista = @ID_Deportista);
+
+        -- Verificar si el deportista está en un grupo permitido para la carrera
+        IF NOT EXISTS (
+            SELECT 1
+            FROM GrupoXCarrera gc
+            INNER JOIN Carrera c ON gc.ID_Carrera = c.Nombre
+            WHERE gc.ID_Grupo = @ID_Grupo AND c.Nombre = @NombreCarrera
+        )
+        BEGIN
+            PRINT 'Error: El deportista no pertenece a un grupo permitido para la carrera privada.';
+            RETURN;
+        END
     END
 
     -- Insertar el registro para asociar al deportista con la carrera

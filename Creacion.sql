@@ -8,7 +8,6 @@ Create Table "Deportista"(
 "Nacimiento" date,
 "Foto_nombre" varchar(255),
 "Datos_Archivo" VARBINARY(MAX),
-"ID_Amigo" varchar(30),
 "ID_Nacionalidad" int,
 Primary Key ("Usuario")
 );
@@ -73,7 +72,8 @@ Primary Key ("Nombre")
 Create Table "Categoria"(
 "ID" int not null,
 "Nombre" varchar(20),
-"Edad" int,
+"Edad_Min" int,
+"Edad_Max" int,
 Primary Key("ID")
 );
 
