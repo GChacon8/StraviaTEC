@@ -150,3 +150,41 @@ D:\Proyecto2Bases\StraviaTEC\SQLAPI (1)\obj\Debug\net6.0\refint\SQLAPI.dll
 D:\Proyecto2Bases\StraviaTEC\SQLAPI (1)\obj\Debug\net6.0\SQLAPI.pdb
 D:\Proyecto2Bases\StraviaTEC\SQLAPI (1)\obj\Debug\net6.0\SQLAPI.genruntimeconfig.cache
 D:\Proyecto2Bases\StraviaTEC\SQLAPI (1)\obj\Debug\net6.0\ref\SQLAPI.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\appsettings.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\SQLAPI.exe
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\SQLAPI.deps.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\SQLAPI.runtimeconfig.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\SQLAPI.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\SQLAPI.pdb
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.csproj.AssemblyReference.cache
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.AssemblyInfoInputs.cache
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.AssemblyInfo.cs
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.csproj.CoreCompileInputs.cache
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets\msbuild.SQLAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.SQLAPI.props
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.SQLAPI.props
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SQLAPI.props
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\scopedcss\bundle\SQLAPI.styles.css
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.csproj.CopyComplete
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\refint\SQLAPI.dll
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.pdb
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\SQLAPI.genruntimeconfig.cache
+C:\Users\jpesq\Documents\GitHub\StraviaTEC1\SQLAPI\obj\Debug\net6.0\ref\SQLAPI.dll

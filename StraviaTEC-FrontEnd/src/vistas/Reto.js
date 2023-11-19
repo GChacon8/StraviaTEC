@@ -9,9 +9,10 @@ import axios from 'axios';
 function Reto() {
   const navigate = useNavigate();
 
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
+    console.log("entre");
     axios.get('https://localhost:7170/api/Reto')
       .then(response => {
         setResult(response.data);
