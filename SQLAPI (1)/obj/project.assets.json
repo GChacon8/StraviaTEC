@@ -1462,26 +1462,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jpesq\\.nuget\\packages\\": {}
+    "C:\\Users\\noemi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+      "projectUniqueName": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
       "projectName": "SQLAPI",
-      "projectPath": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
-      "packagesPath": "C:\\Users\\jpesq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jpesq\\Documents\\StraviaTEC\\SQLAPI (1)\\obj\\",
+      "projectPath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+      "packagesPath": "C:\\Users\\noemi\\.nuget\\packages\\",
+      "outputPath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jpesq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\noemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

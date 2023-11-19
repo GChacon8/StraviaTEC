@@ -10,4 +10,5 @@ public class Carrera
     public int ID_Tipo_Actividad { get; set; }
     public int ID_Categoria { get; set; }
     public bool Privada { get; set; }
+    public string Cord {  get; set; }
 }

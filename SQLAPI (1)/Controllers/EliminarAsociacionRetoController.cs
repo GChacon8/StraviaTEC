@@ -7,13 +7,13 @@ using SQLAPI.Model;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UnirseGrupoController : ControllerBase
+public class EliminarAsociacionRetoController : ControllerBase
 {
     private string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-    [HttpPost("UnirseGrupo")]
+    [HttpPost("EliminarAsociacionReto")]
     [ProducesResponseType(typeof(string), 200)]
-    public async Task<IActionResult> UnirseGrupo([FromBody] UnirseGrupoRequest request)
+    public async Task<IActionResult> EliminarAsociacionReto()
     {
         try
         {
@@ -21,14 +21,11 @@ public class UnirseGrupoController : ControllerBase
             {
                 await connection.OpenAsync();
 
-                using (SqlCommand cmd = new SqlCommand("UnirseGrupo", connection))
+                using (SqlCommand cmd = new SqlCommand("EliminarAsociacionReto", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Parámetros del procedimiento almacenado
-                    cmd.Parameters.Add(new SqlParameter("@NombreDeportista", SqlDbType.VarChar) { Value = request.NombreDeportista });
-                    cmd.Parameters.Add(new SqlParameter("@ID_Grupo", SqlDbType.VarChar) { Value = request.ID_Grupo });
-
+                    
                     // Ejecutar el procedimiento almacenado
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -42,4 +39,3 @@ public class UnirseGrupoController : ControllerBase
         }
     }
 }
-

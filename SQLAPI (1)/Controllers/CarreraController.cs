@@ -45,7 +45,8 @@ namespace SQLAPI.Controllers
                                 Precio = Convert.ToInt32(sdr["Precio"]),
                                 ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"]),
                                 ID_Categoria = Convert.ToInt32(sdr["ID_Categoria"]),
-                                Privada = Convert.ToBoolean(sdr["Privada"])
+                                Privada = Convert.ToBoolean(sdr["Privada"]),
+                                Cord = Convert.ToString(sdr["Cord"])
                             });
                         }
                     }
@@ -83,7 +84,8 @@ namespace SQLAPI.Controllers
                                 Precio = Convert.ToInt32(sdr["Precio"]),
                                 ID_Tipo_Actividad = Convert.ToInt32(sdr["ID_Tipo_Actividad"]),
                                 ID_Categoria = Convert.ToInt32(sdr["ID_Categoria"]),
-                                Privada = Convert.ToBoolean(sdr["Privada"])
+                                Privada = Convert.ToBoolean(sdr["Privada"]),
+                                Cord = Convert.ToString(sdr["Cord"])
                             };
                         }
                     }
@@ -108,7 +110,7 @@ namespace SQLAPI.Controllers
             }
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO Carrera VALUES (@Nombre, @Fecha, @Cuenta, @Precio, @ID_Tipo_Actividad, @ID_Categoria, @Privada, @Mapa)";
+                string query = "INSERT INTO Carrera VALUES (@Nombre, @Fecha, @Cuenta, @Precio, @ID_Tipo_Actividad, @ID_Categoria, @Privada, @Mapa, @Cord)";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@Nombre", carrera.Nombre);
@@ -119,6 +121,7 @@ namespace SQLAPI.Controllers
                     cmd.Parameters.AddWithValue("@ID_Tipo_Actividad", carrera.ID_Tipo_Actividad);
                     cmd.Parameters.AddWithValue("@ID_Categoria", carrera.ID_Categoria);
                     cmd.Parameters.AddWithValue("@Privada", carrera.Privada);
+                    cmd.Parameters.AddWithValue("@Cord", carrera.Cord);
 
                     con.Open();
                     int i = cmd.ExecuteNonQuery();
@@ -143,7 +146,7 @@ namespace SQLAPI.Controllers
 
             if (ModelState.IsValid)
             {
-                string query = "UPDATE Carrera SET Fecha = @Fecha, Mapa = @Mapa, Cuenta = @Cuenta, Precio = @Precio, ID_Tipo_Actividad = @ID_Tipo_Actividad, ID_Categoria = @ID_Categoria, Privada = @Privada WHERE Nombre = @Nombre";
+                string query = "UPDATE Carrera SET Fecha = @Fecha, Mapa = @Mapa, Cuenta = @Cuenta, Precio = @Precio, ID_Tipo_Actividad = @ID_Tipo_Actividad, ID_Categoria = @ID_Categoria, Privada = @Privada, Cord = @Cord WHERE Nombre = @Nombre";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, con))
@@ -156,6 +159,7 @@ namespace SQLAPI.Controllers
                         cmd.Parameters.AddWithValue("@ID_Categoria", carrera.ID_Categoria);
                         cmd.Parameters.AddWithValue("@Nombre", carrera.Nombre);
                         cmd.Parameters.AddWithValue("@Privada", carrera.Privada);
+                        cmd.Parameters.AddWithValue("@Cord", carrera.Cord);
 
                         con.Open();
                         int i = cmd.ExecuteNonQuery();

@@ -14,6 +14,5 @@ public class Deportista
     public string Apellido2 { get; set; }
     public DateTime Nacimiento { get; set; }
     public string Foto { get; set; }
-    public string ID_Amigo { get; set; }
     public int ID_Nacionalidad { get; set; }
 }

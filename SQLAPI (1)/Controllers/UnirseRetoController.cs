@@ -1,62 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
+using SQLAPI.Model;
 
 [Route("api/[controller]")]
 [ApiController]
 public class UnirseRetoController : ControllerBase
 {
-    private readonly string _connectionString;
+    private string constr = "Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-    public UnirseRetoController(IConfiguration configuration)
-    {
-        _connectionString = configuration.GetConnectionString("Server=tcp:straviatecg4.database.windows.net,1433;Initial Catalog=StraviaTec;Persist Security Info=False;User ID=Grupo4;Password=claveBASES.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-    }
-
-    [HttpPost("UnirseReto")]
-    public IActionResult UnirseReto([FromForm] string nombreDeportista, [FromForm] int idReto)
+    [HttpPost("UnirseGrupo")]
+    [ProducesResponseType(typeof(string), 200)]
+    public async Task<IActionResult> UnirseGrupo([FromBody] UnirseRetoRequest request)
     {
         try
         {
-            string mensaje = "";
-
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(constr))
             {
-                connection.Open();
+                await connection.OpenAsync();
 
                 using (SqlCommand cmd = new SqlCommand("UnirseReto", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Parámetros del procedimiento almacenado
-                    cmd.Parameters.Add(new SqlParameter("@NombreDeportista", SqlDbType.VarChar) { Value = nombreDeportista });
-                    cmd.Parameters.Add(new SqlParameter("@ID_Reto", SqlDbType.Int) { Value = idReto });
-
-                    // Obtener el mensaje del procedimiento almacenado
-                    var mensajeOutput = new SqlParameter("@Mensaje", SqlDbType.VarChar, 1000)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(mensajeOutput);
+                    cmd.Parameters.Add(new SqlParameter("@NombreDeportista", SqlDbType.VarChar) { Value = request.NombreDeportista });
+                    cmd.Parameters.Add(new SqlParameter("@ID_Reto", SqlDbType.VarChar) { Value = request.ID_Reto });
 
                     // Ejecutar el procedimiento almacenado
-                    cmd.ExecuteNonQuery();
-
-                    // Obtener el mensaje de salida
-                    mensaje = mensajeOutput.Value.ToString();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
 
-            if (mensaje.StartsWith("Error"))
-            {
-                return BadRequest(mensaje);
-            }
-            else
-            {
-                return Ok(mensaje);
-            }
+            return Ok("Operación exitosa");
         }
         catch (Exception ex)
         {
