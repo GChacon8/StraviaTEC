@@ -12,8 +12,12 @@ import ico from "../Images/Ico.jpg"
 
 function User_view() {
   const [showCommentModal, setShowCommentModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [comment, setComment] = useState();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
 
   var [user_info, setUserInfo] = useState([]);
@@ -309,18 +313,18 @@ function User_view() {
     [9.857107235507616, -83.91526346743294],
     [9.857101726371246, -83.91529472956448],
     [9.857093436556555, -83.91536048392601]
-];
+  ];
 
 
-  
-  
+
+
 
   const [comentarios, setComentarios] = useState([
     { usuario: 'Usuario1', texto: 'Hola' },
     { usuario: 'Usuario2', texto: 'Buenísimo' },
     { usuario: 'Usuario3', texto: 'Que duro Yerry' },
   ]);
-  
+
 
 
   const [formData, setFormData] = useState({
@@ -336,7 +340,7 @@ function User_view() {
 
   //Variable para controlar la información del usuario
 
-  
+
 
 
 
@@ -345,10 +349,10 @@ function User_view() {
     const { value } = event.target;
     setComment(value);
   };
-  
-//Subir el comentario a la DB
-  const handlePublishComment =()=>{
-   
+
+  //Subir el comentario a la DB
+  const handlePublishComment = () => {
+
     const nuevoComentario = {
       usuario: user_info[0].Usuario,
       texto: comment,
@@ -365,7 +369,18 @@ function User_view() {
     console.log('Realizar busqueda de usuario');
     console.log('El usuario iniciado es:');
     console.log(Cookies.get('userInfo'));
+    //Realizar el get del api aquí y actualizar los resultados de busqueda
+    setSearchResults([
+      { id: 1, usuario: 'Usuario1', tipo:'usuario' },
+      { id: 2, usuario: 'Grupo1', tipo:'grupo' },
+      { id: 3, usuario: 'Usuario2', tipo:'usuario' },
+      { id: 4, usuario: 'Grupo2', tipo:'grupo' },
+    ]);
+
+    //para mostrar el modal con los resultados obtenidos
+    setShowSearchModal(true);
   };
+
 
   const handleComments = (postID) => {
     console.log("COMENTARIOS");
@@ -374,14 +389,36 @@ function User_view() {
     document.body.style.overflow = 'hidden';
   };
 
-  const handleAddActividad =()=>{
+  //agregar amigos
+  const handleAddFriend = (friend) => {
+    console.log(friend);
+  };
+  //agregar grupo
+  const handleAddGroup = (group) => {
+    console.log(group);
+  };
+
+  const handleAddActividad = () => {
     navigate('/StraviaTec/Agregar_Actividad');
   }
+
+  const handleViewUser = () => {
+    navigate('/StraviaTec/UserProfile');
+  };
 
   //Closing the modal
   const handleModalClose = () => {
     setShowCommentModal(false);
+    setShowSearchModal(false);
     document.body.style.overflow = 'auto';
+  };
+
+  const handleRetosActivos =()=>{
+    navigate("/StraviaTec/Retos_Activos")
+  };
+
+  const handleCarrerasActivas =()=>{
+    navigate("/StraviaTec/Carreras_Activas")
   };
 
 
@@ -436,7 +473,7 @@ function User_view() {
   return (
     <div className='container'>
 
-      <nav className="navbar navbar-fluid  navbar-dark justify-content-between navbarr">
+      <nav className="navbar navbar-fluid navbar-dark justify-content-between navbarr">
         <div className="container">
           <a className="navbar-brand" href="#">
             <img src={ico} width="50" height="50" alt="" style={{ marginRight: "20px" }} />
@@ -446,18 +483,24 @@ function User_view() {
           <form>
             <div className="row">
               <div className="col">
-                <input className="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" />
+                <input
+                  className="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Buscar"
+                  aria-label="Search"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
               <div className="col">
-                <button className="btn btn-outline-light my-2 my-sm-0" onClick={handleSubmit}>Buscar</button>
+                <button className="btn btn-outline-light my-2 my-sm-0" onClick={handleSubmit}>
+                  Buscar
+                </button>
               </div>
-
             </div>
-
           </form>
-
           <ul className="navbar-nav ml-auto d-flex">
-            
+
             <li className="nav-item">
               <Link className="nav-link" to="/Prueba_Api">
                 API
@@ -465,7 +508,7 @@ function User_view() {
             </li>
 
           </ul>
-          
+
           <ul className="navbar-nav ml-auto d-flex">
             <li className="nav-item">
               <Link className="nav-link" to="/StraviaTec/Retos">
@@ -483,7 +526,7 @@ function User_view() {
           </ul>
 
           <ul className="navbar-nav ml-auto d-flex">
-            
+
             <li className="nav-item">
               <Link className="nav-link" to="/StraviaTec/Admin_view">
                 Organizador
@@ -491,7 +534,17 @@ function User_view() {
             </li>
 
           </ul>
-          
+
+          <ul className="navbar-nav ml-auto d-flex">
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Cerrar Sesión
+              </Link>
+            </li>
+
+          </ul>
+
 
         </div>
       </nav>
@@ -509,10 +562,22 @@ function User_view() {
               <div key={usuario.Usuario} className='user'>
                 <h2>{usuario.Nombre1} {usuario.Nombre2} {usuario.Apellido1}</h2>
                 <p>{usuario.Usuario}</p>
-
-                <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleAddActividad}>
-            Registrar Actividad
-          </button>
+                <p>
+                   <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleAddActividad}>
+                  Registrar Actividad
+                </button>
+                <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold', marginLeft:'20px' }} onClick={handleViewUser}>
+                  Ver Perfil
+                </button>
+                </p>
+                <p>
+                   <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleRetosActivos}>
+                  Retos Activos
+                </button>
+                <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold', marginLeft:'20px' }} onClick={handleCarrerasActivas}>
+                  Carreras Activas
+                </button>
+                </p>
 
               </div>
             ))}
@@ -559,23 +624,11 @@ function User_view() {
 
       </div>
 
-
-
-
-
-
-
-
-
-
-      {/* Modal Bootstrap */}
-
-
-
+      {/* Modal de Comentarios */}
 
       <div
         className="modal"
-        
+
         style={{ display: showCommentModal ? 'block' : 'none' }}
       >
         <div className="overlay">
@@ -583,7 +636,7 @@ function User_view() {
             <div className="modal-content align_center">
               <div className="modal-header">
                 <h5 className="modal-title">Comentarios</h5>
-             
+
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleModalClose}>
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -599,14 +652,14 @@ function User_view() {
 
               <div className="modal-footer">
 
-               
-                  <input
-                    id="comment"
-                    name="comment"
-                    value={comment}
-                    onChange={handleInputChange}
-                  />
-              
+
+                <input
+                  id="comment"
+                  name="comment"
+                  value={comment}
+                  onChange={handleInputChange}
+                />
+
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -620,6 +673,61 @@ function User_view() {
           </div>
         </div>
       </div>
+
+      {/* Modal de la Búsqueda */}
+
+      <div
+  className="modal"
+  style={{ display: showSearchModal ? 'block' : 'none' }}
+>
+  <div className="overlay">
+    <div className="modal-dialog modal-dialog-centered" role="document">
+      <div className="modal-content align_center">
+        <div className="modal-header">
+          <h5 className="modal-title">Búsqueda</h5>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            onClick={handleModalClose}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body ">
+          {searchResults.map((busqueda) => (
+            <div className="bordes" key={busqueda.id}>
+              <p>
+                <span style={{ marginRight: '20px', marginLeft: '20px' }}>
+                  {busqueda.usuario}
+                </span>
+                {busqueda.tipo === 'usuario' && (
+                  <button
+                    className="btn btn-outline-dark my-2"
+                    style={{ fontWeight: 'bold' }}
+                    onClick={() => handleAddFriend(busqueda.usuario)}
+                  >
+                    Agregar Amigo
+                  </button>
+                )}
+                {busqueda.tipo === 'grupo' && (
+                  <button
+                    className="btn btn-outline-dark my-2"
+                    style={{ fontWeight: 'bold' }}
+                    onClick={() => handleAddGroup(busqueda.usuario)}
+                  >
+                    Unirse al Grupo
+                  </button>
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

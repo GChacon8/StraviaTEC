@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
-import '../Css/Styles.css';
+import '../Css/Styles.css'; 
 import Cookies from 'js-cookie';
-import ico from "../Images/Ico.jpg"
+import ico from "../Images/Ico.jpg";
 
-function Reto() {
+function RetosActivos() {
   const navigate = useNavigate();
 
   var ruta1 = [
@@ -263,58 +263,57 @@ function Reto() {
       Descripcion: "Correr sin parar durante 1 hora",
     },
   ];
-
-
-
-
-  const handleClose = () => {
-    navigate('/StraviaTec');
-  }
-
-  const handlejoinReto = (ID) => {
-    console.log('Se unió a un reto');
-    console.log(Cookies.get('userInfo'))
-    console.log(ID);
-
-  };
+  
 
   return (
     <div style={{ textAlign: 'center' }}>
 
 
-      <nav className="navbar navbar-fluid navbar-dark justify-content-between navbarr">
-        <div className="container">
-          <a className="navbar-brand" href="#">
-            <img src={ico} width="50" height="50" alt="" style={{ marginRight: "20px" }} />
-            StraviaTec
-          </a>
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/StraviaTec">
-                Inicio
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <h1 style={{ fontWeight: 'bold', fontSize: '4em' }}>Retos</h1>
+    <nav className="navbar navbar-fluid navbar-dark justify-content-between navbarr">
+      <div className="container">
+        <a className="navbar-brand" href="#">
+          <img src={ico} width="50" height="50" alt="" style={{ marginRight: "20px" }} />
+          StraviaTec
+        </a>
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/StraviaTec">
+              Inicio
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <h1 style={{ fontWeight: 'bold', fontSize: '4em' }}>Retos Activos</h1>
       <div className="Carreras">
         {RetosInfo.map(reto => (
           <div key={reto.ID} className='carrera_post'>
             <h2>{reto.Nombre}</h2>
             <p><span style={{ fontWeight: 'bold' }}>Fecha: </span>: {reto.Fecha}</p>
             <p><span style={{ fontWeight: 'bold' }}>Tipo de Actividad: </span>{reto.TipoActividad}</p>
-            <p><span style={{ fontWeight: 'bold' }}>Descripción: </span>{reto.Descripcion}</p>
-            <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={() => handlejoinReto(reto.ID)}>
-              Participar
-            </button>
+            <p><span style={{ fontWeight: 'bold' }}>Objetivo: </span>{reto.Descripcion}</p>
+            <p><span style={{ fontWeight: 'bold' }}>Avance del Deportista: </span>{reto.Avance}</p>
+            <p><span style={{ fontWeight: 'bold' }}>Días Restantes: </span>{calcularDiasRestantes(reto.Fecha)}</p>
           </div>
         ))}
       </div>
-
     </div>
   );
 }
 
-export default Reto;
+function calcularDiasRestantes(fechaFin) {
+  const fechaFinMs = new Date(fechaFin).getTime();
+  const hoyMs = new Date().getTime();
+  const diferenciaMs = fechaFinMs - hoyMs;
+  const diasRestantes = Math.ceil(diferenciaMs / (1000 * 60 * 60 * 24));
+
+  if(diasRestantes < 0){
+    return 0;
+  } else{
+    return diasRestantes;
+  }
+  
+}
+
+export default RetosActivos;
