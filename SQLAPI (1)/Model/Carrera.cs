@@ -1,7 +1,10 @@
-﻿namespace SQLAPI.Model;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SQLAPI.Model;
 
 public class Carrera
 {
+    [Required]
     public string Nombre { get; set; }
     public DateTime Fecha { get; set; }
     public string Mapa { get; set; }
