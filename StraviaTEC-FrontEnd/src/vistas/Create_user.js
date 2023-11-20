@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Css/Styles.css';
-
-
+import axios from 'axios';
 
 function Create_user() {
   const [firstName, setFirstName] = useState('');
@@ -14,6 +13,30 @@ function Create_user() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  function addUser() {
+    const user = {
+      usuario: username,
+      contrasena: password,
+      nombre1: firstName,
+      nombre2: "",
+      apellido1: lastName,
+      apellido2: "",
+      nacimiento: birthDate + "T04:42:47.930Z",
+      foto: photo,
+      ID_Nacionalidad: 2
+    }
+    console.log(user);
+    axios.post('https://localhost:7170/api/Deportista', user)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+    navigate('/');
+  }
+
 
   // Calcula la edad tomando en cuenta la fecha de nacimiento
   const calculateAge = (birthDate) => {
@@ -127,7 +150,7 @@ function Create_user() {
           />
         </div>
         <div className="col-12">
-          <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleCreateUser}>
+          <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={addUser}>
             Crear Usuario
           </button>
           <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold', marginLeft:'20px' }} onClick={handleBack}>

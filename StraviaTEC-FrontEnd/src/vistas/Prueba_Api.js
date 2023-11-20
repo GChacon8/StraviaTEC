@@ -11,11 +11,25 @@ let answer;
 async function getNacionalidades() {
     try {
         //console.log(apiUrl);
-        const response = await axios.get('https://localhost:7170/api/Reto');
+        const response = await axios.get('https://localhost:7170/api/Nacionalidad');
 
-        console.log(response.data[0].id);
+        console.log(response.data);
         //return(response.data);
     } catch (error) {console.error('Error:', error)}
+}
+
+function addNacionalidades () {
+    const postdata = {
+        id: 6,
+        nombre: "honduras"
+    }
+     axios.post('https://localhost:7170/api/Nacionalidad', postdata)
+     .then(response => {
+        console.log('Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 }
 
 class Prueba_Api extends Component {
@@ -25,6 +39,9 @@ class Prueba_Api extends Component {
                 <h1>StraviaTEC</h1>
                 <button className="btn btn-primary .btn-xs" onClick={getNacionalidades}>
                     Get
+                </button>
+                <button className="btn btn-primary .btn-xs" onClick={addNacionalidades}>
+                    Post
                 </button>
             </div>
         )

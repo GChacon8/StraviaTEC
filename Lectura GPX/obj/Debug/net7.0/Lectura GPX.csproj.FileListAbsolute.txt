@@ -1,0 +1,14 @@
+C:\Users\jpesq\Documents\Lectura GPX\bin\Debug\net7.0\Lectura GPX.exe
+C:\Users\jpesq\Documents\Lectura GPX\bin\Debug\net7.0\Lectura GPX.deps.json
+C:\Users\jpesq\Documents\Lectura GPX\bin\Debug\net7.0\Lectura GPX.runtimeconfig.json
+C:\Users\jpesq\Documents\Lectura GPX\bin\Debug\net7.0\Lectura GPX.dll
+C:\Users\jpesq\Documents\Lectura GPX\bin\Debug\net7.0\Lectura GPX.pdb
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.AssemblyInfoInputs.cache
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.AssemblyInfo.cs
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.csproj.CoreCompileInputs.cache
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.dll
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\refint\Lectura GPX.dll
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.pdb
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\Lectura GPX.genruntimeconfig.cache
+C:\Users\jpesq\Documents\Lectura GPX\obj\Debug\net7.0\ref\Lectura GPX.dll

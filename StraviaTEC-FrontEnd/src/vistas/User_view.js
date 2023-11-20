@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
@@ -18,10 +19,42 @@ function User_view() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-
-
-  var [user_info, setUserInfo] = useState([]);
   var [postInfo, setpostInfo] = useState([]);
+
+  var user_info = [];
+  
+  console.log(Cookies.get().userInfo);
+
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://localhost:7170/api/Deportista')
+      .then(response => {
+         setResult(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i].usuario === Cookies.get().userInfo) {
+      const datos = {
+        Usuario: result[i].usuario,
+        Contrasena: result[i].contrasena,
+        Nombre1: result[i].nombre1,
+        Nombre2: result[i].nombre2,
+        Apellido1: result[i].apellido1,
+        Apellido2: result[i].apellido2,
+        Nacimiento: result[i].nacimiento,
+        Foto_nombre: result[i].foto,
+        Datos_Archivo: "",
+        ID_Amigo: "amigo456",
+        ID_Nacionalidad: result[i].iD_Nacionalidad
+      }
+      user_info.push(datos);
+    }
+   }
 
   var carrera1 = [
     [9.9383849, -84.1088645],
@@ -420,22 +453,6 @@ function User_view() {
   const handleCarrerasActivas =()=>{
     navigate("/StraviaTec/Carreras_Activas")
   };
-
-
-  //asignar a user_info lo que devuelve el api del usuario luego de realizar un login
-  user_info = [{
-    Usuario: "usuario123",
-    Contrasena: "contraseña123",
-    Nombre1: "Pedro",
-    Nombre2: null,
-    Apellido1: "Perico",
-    Apellido2: "Cárdenas",
-    Nacimiento: "1990-05-15",
-    Foto_nombre: "perfil.jpg",
-    Datos_Archivo: "",
-    ID_Amigo: "amigo456",
-    ID_Nacionalidad: 1
-  }];
 
   //--------------------------------------------------------------------------------
   postInfo = [

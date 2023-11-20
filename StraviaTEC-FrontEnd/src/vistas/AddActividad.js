@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 import ico from "../Images/Ico.jpg"
+import axios from "axios";
 
 const AddActividad = () => {
   const [nombre, setNombre] = useState('');
@@ -16,6 +17,71 @@ const AddActividad = () => {
   const [completitud, setCompletitud] = useState(false);
   const [esReto, setEsReto] = useState(false);
   const [esCarrera, setEsCarrera] = useState(false);
+
+  var user_info = [];
+
+  const [result, setResult] = useState([]);
+  const [activities, setActivities] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://localhost:7170/api/Deportista')
+      .then(response => {
+         setResult(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get('https://localhost:7170/api/Actividad')
+      .then(response => {
+         setActivities(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i].usuario === Cookies.get().userInfo) {
+      const datos = {
+        Usuario: result[i].usuario,
+        Contrasena: result[i].contrasena,
+        Nombre1: result[i].nombre1,
+        Nombre2: result[i].nombre2,
+        Apellido1: result[i].apellido1,
+        Apellido2: result[i].apellido2,
+        Nacimiento: result[i].nacimiento,
+        Foto_nombre: result[i].foto,
+        Datos_Archivo: "",
+        ID_Amigo: "amigo456",
+        ID_Nacionalidad: result[i].iD_Nacionalidad
+      }
+      user_info.push(datos);
+    }
+   }
+
+  function addActivity() {
+    const activity = {
+      id: activities.length,
+      duracion: duracion,
+      fecha_Hora: fecha + "T" +hora,
+      kilometros: kilometraje,
+      mapa: "string",
+      iD_Deportista: user_info[0].Usuario,
+      iD_Tipo_Actividad: tipoActividad,
+      cord: "string"
+    }
+    console.log(activity);
+    axios.post('https://localhost:7170/api/Actividad', activity)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
 
   const handleEsRetoChange = () => {
     setEsReto(!esReto);
@@ -176,7 +242,7 @@ const AddActividad = () => {
             <label className="form-check-label" htmlFor="esCarrera">Carrera</label>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary" style={{marginTop:'20px'}}>
+        <button type="submit" className="btn btn-primary" style={{marginTop:'20px'}} onClick={addActivity}>
           Agregar
         </button>
       </form>

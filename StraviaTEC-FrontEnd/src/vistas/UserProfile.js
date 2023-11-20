@@ -1,25 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Css/Styles.css'; 
 import Cookies from 'js-cookie';
 import ico from "../Images/Ico.jpg"
+import axios from 'axios';
 
 
-function UserProfile({ userId }) {
+function UserProfile() {
     const [showModifyModal, setModifyModal] = useState(false);
     const [modifiedUserInfo, setModifiedUserInfo] = useState({}); // Estado para almacenar los valores modificados
 
-    const userInfo = {
-        id: 123,
-        name: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-    };
+    var user_info = [];
+  
+  console.log(Cookies.get().userInfo);
+
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://localhost:7170/api/Deportista')
+      .then(response => {
+         setResult(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i].usuario === Cookies.get().userInfo) {
+      const datos = {
+        Usuario: result[i].usuario,
+        Contrasena: result[i].contrasena,
+        Nombre1: result[i].nombre1,
+        Nombre2: result[i].nombre2,
+        Apellido1: result[i].apellido1,
+        Apellido2: result[i].apellido2,
+        Nacimiento: result[i].nacimiento,
+        Foto_nombre: result[i].foto,
+        Datos_Archivo: "",
+        ID_Amigo: "amigo456",
+        ID_Nacionalidad: result[i].iD_Nacionalidad
+      }
+      user_info.push(datos);
+    }
+   }
 
     const handleUpdateAccount = () => {
-        setModifiedUserInfo({ ...userInfo });
-        setModifyModal(true);
+        
     };
 
     const handleModalClose = () => {
@@ -61,9 +89,9 @@ function UserProfile({ userId }) {
 </nav>
             <div className='perfil'>
                 <h2>Perfil de Usuario</h2>
-                <p><span style={{ fontWeight: 'bold' }}>Nombre: </span>{userInfo.name}</p>
-                <p><span style={{ fontWeight: 'bold' }}>Apellido: </span>{userInfo.lastName}</p>
-                <p><span style={{ fontWeight: 'bold' }}>Correo Electrónico: </span> {userInfo.email}</p>
+                <p><span style={{ fontWeight: 'bold' }}>Nombre: </span>{user_info[0].Nombre1 + " " + user_info[0].Nombre2}</p>
+                <p><span style={{ fontWeight: 'bold' }}>Apellido: </span>{user_info[0].Apellido1 + " " + user_info[0].Apellido2}</p>
+                <p><span style={{ fontWeight: 'bold' }}>Contraseña: </span> {user_info[0].Contrasena}</p>
                 <p>
                     <button className="btn btn-outline-dark my-2" style={{ fontWeight: 'bold' }} onClick={handleUpdateAccount}>
                         Modificar Cuenta
