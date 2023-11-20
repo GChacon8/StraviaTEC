@@ -6,8 +6,7 @@ Create Table "Deportista"(
 "Apellido1" varchar(20),
 "Apellido2" varchar(20),
 "Nacimiento" date,
-"Foto_nombre" varchar(255),
-"Datos_Archivo" VARBINARY(MAX),
+"Foto" varchar(max),
 "ID_Nacionalidad" int,
 Primary Key ("Usuario")
 );
@@ -28,12 +27,11 @@ Primary Key("ID")
 
 Create Table"Actividad"(
 "ID" int not null,
-"Duracion" Time,
-"Hora" Time,
-"Fecha" Date,
+"Duracion" int,
+"Fecha_Hora" DateTime,
 "Kilometros" int,
-"Mapa_Nombre" varchar(255),
-"Datos_Archivo" VARBINARY(MAX),
+"Mapa" varchar(max),
+"Cord" varchar(max),
 "ID_Deportista" varchar(30),
 "ID_Tipo_Actividad" int,
 Primary Key("ID")
@@ -59,8 +57,8 @@ Primary Key("ID")
 Create Table "Carrera"(
 "Nombre" varchar(20) not null,
 "Fecha" date,
-"Recorrido_nombre" varchar(255),
-"Datos_Archivo" VARBINARY(MAX),
+"Mapa" varchar(max),
+"Cord" varchar(max),
 "Cuenta" varchar(50),
 "Precio" int,
 "ID_Tipo_Actividad" int,
@@ -82,8 +80,7 @@ Create Table "Patrocinador"(
 "Nombre_Comercial" varchar(30) not null,
 "Representante" varchar(20),
 "Telefono" varchar(15),
-"Logo_Nombre" varchar(255),
-"Datos_Archivo" VARBINARY(MAX),
+"Logo" varchar(max),
 Primary Key ("Nombre_Comercial")
 );
 
@@ -131,9 +128,20 @@ Create Table "PatrocinadorXCarrera"(
 Primary Key("ID_Patrocinador")
 );
 
-ALTER TABLE "Deportista"
+Create Table "Amigos"(
+"ID_Deportista" varchar(30) not null,
+"ID_Amigo" varchar(30) not null
+primary key("ID_Deportista","ID_Amigo")
+);
+
+ALTER TABLE "Amigos"
 ADD CONSTRAINT "ID_Amigo_FK"
 FOREIGN KEY ("ID_Amigo")
+REFERENCES "Deportista"("Usuario");
+
+ALTER TABLE "Amigos"
+ADD CONSTRAINT "ID_Amigo_FK1"
+FOREIGN KEY ("ID_Deportista")
 REFERENCES "Deportista"("Usuario");
 
 ALTER TABLE "Deportista"

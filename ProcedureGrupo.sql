@@ -8,14 +8,14 @@ BEGIN
     -- Verificar si el deportista existe
     IF NOT EXISTS (SELECT 1 FROM Deportista WHERE Usuario = @NombreDeportista)
     BEGIN
-        PRINT 'Error: El deportista no existe.';
+        RAISERROR ('Error: El deportista no existe.', 16, 1);
         RETURN;
     END
 
     -- Verificar si el grupo existe
     IF NOT EXISTS (SELECT 1 FROM Grupo WHERE ID = @ID_Grupo)
     BEGIN
-        PRINT 'Error: El grupo no existe.';
+        RAISERROR ('Error: El grupo no existe.', 16, 1);
         RETURN;
     END
 
@@ -26,7 +26,7 @@ BEGIN
         WHERE ID_Deportista = @NombreDeportista AND ID_Grupo = @ID_Grupo
     )
     BEGIN
-        PRINT 'Error: El deportista ya pertenece al grupo.';
+        RAISERROR ('Error: El deportista ya pertenece al grupo.', 16, 1);
         RETURN;
     END
 
@@ -34,5 +34,6 @@ BEGIN
     INSERT INTO DeportistaXGrupo (ID_Deportista, ID_Grupo)
     VALUES (@NombreDeportista, @ID_Grupo);
 
-    PRINT 'Deportista se ha unido exitosamente al grupo.';
+    RAISERROR ('Deportista se ha unido exitosamente al grupo.', 0, 1);
 END;
+
