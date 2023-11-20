@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FWLM2wBVLHSnGhjKfIR7CN5IQblZGecgj1jEicSuRUrfxEgjwHlKY6J7f1Bibn5KeozSZfFM5BT5CLSNFrjBMQ==",
+  "dgSpecHash": "+/imHdCYl9cYv9El6jJAEFQdzq6eiNWRAbDzR2YnW9CFjxTgexbuBXC8xf4Y12wkOOMLJkManE4xrVV2l+iwtw==",
   "success": true,
-  "projectFilePath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+  "projectFilePath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI\\SQLAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\noemi\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\noemi\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

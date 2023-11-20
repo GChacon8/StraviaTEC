@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj": {}
+    "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI\\SQLAPI.csproj": {}
   },
   "projects": {
-    "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj": {
+    "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI\\SQLAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+        "projectUniqueName": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI\\SQLAPI.csproj",
         "projectName": "SQLAPI",
-        "projectPath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\SQLAPI.csproj",
+        "projectPath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI\\SQLAPI.csproj",
         "packagesPath": "C:\\Users\\noemi\\.nuget\\packages\\",
-        "outputPath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI (1)\\obj\\",
+        "outputPath": "D:\\Proyecto2Bases\\StraviaTEC\\SQLAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\noemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
